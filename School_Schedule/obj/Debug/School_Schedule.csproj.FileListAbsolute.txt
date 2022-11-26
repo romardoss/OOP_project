@@ -1,0 +1,16 @@
+E:\all_projects\OOP_new\School_Schedule\School_Schedule\bin\Debug\School_Schedule.exe.config
+E:\all_projects\OOP_new\School_Schedule\School_Schedule\bin\Debug\School_Schedule.exe
+E:\all_projects\OOP_new\School_Schedule\School_Schedule\bin\Debug\School_Schedule.pdb
+E:\all_projects\OOP_new\School_Schedule\School_Schedule\obj\Debug\School_Schedule.csproj.AssemblyReference.cache
+E:\all_projects\OOP_new\School_Schedule\School_Schedule\obj\Debug\School_Schedule.csproj.SuggestedBindingRedirects.cache
+E:\all_projects\OOP_new\School_Schedule\School_Schedule\obj\Debug\MainWindow.g.cs
+E:\all_projects\OOP_new\School_Schedule\School_Schedule\obj\Debug\App.g.cs
+E:\all_projects\OOP_new\School_Schedule\School_Schedule\obj\Debug\School_Schedule_MarkupCompile.cache
+E:\all_projects\OOP_new\School_Schedule\School_Schedule\obj\Debug\School_Schedule_MarkupCompile.lref
+E:\all_projects\OOP_new\School_Schedule\School_Schedule\obj\Debug\MainWindow.baml
+E:\all_projects\OOP_new\School_Schedule\School_Schedule\obj\Debug\School_Schedule.g.resources
+E:\all_projects\OOP_new\School_Schedule\School_Schedule\obj\Debug\School_Schedule.Properties.Resources.resources
+E:\all_projects\OOP_new\School_Schedule\School_Schedule\obj\Debug\School_Schedule.csproj.GenerateResource.cache
+E:\all_projects\OOP_new\School_Schedule\School_Schedule\obj\Debug\School_Schedule.csproj.CoreCompileInputs.cache
+E:\all_projects\OOP_new\School_Schedule\School_Schedule\obj\Debug\School_Schedule.exe
+E:\all_projects\OOP_new\School_Schedule\School_Schedule\obj\Debug\School_Schedule.pdb

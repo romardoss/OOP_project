@@ -24,5 +24,11 @@ namespace School_Schedule
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine("Okay");
+            Console.WriteLine("Okay");
+        }
     }
 }
