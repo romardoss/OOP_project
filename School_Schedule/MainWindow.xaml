@@ -7,12 +7,9 @@
         mc:Ignorable="d"
         Title="Schedule" Height="450" Width="800" Loaded="Window_Loaded" >
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="63*"/>
-            <ColumnDefinition Width="37*"/>
-        </Grid.ColumnDefinitions>
         <Button Content="Додати урок" Click="Button_Click" 
-                Width="150" Height="30" Margin="325,5,29,4"/>
+                Width="150" Height="30"/>
+        <ListBox Grid.Row="1" x:Name="listTest" Margin="66,21,416,21"/>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.1*"/>
             <RowDefinition />

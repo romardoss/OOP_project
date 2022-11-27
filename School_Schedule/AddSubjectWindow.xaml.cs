@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using School_Schedule.Logic.SubjectFolder;
 using School_Schedule.Logic.TeacherFolder;
+using School_Schedule.Logic.LessonFolder;
 
 namespace School_Schedule
 {
@@ -29,27 +30,65 @@ namespace School_Schedule
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
             DateOfLesson.IsEnabled = true;
+            ChoseDayOfWeek.IsEnabled = false;
         }
 
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
             DateOfLesson.IsEnabled = false;
+            ChoseDayOfWeek.IsEnabled = true;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             ChoseSubject.ItemsSource = Subject.AllNames;
             ChoseTeacher.ItemsSource = Teacher.AllNames;
+            ChoseDayOfWeek.ItemsSource = new List<string>{"Monday", 
+                "Tuesday", "Wednesday", "Thursday", "Friday", 
+                "Saturday", "Sunday"};
+        }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void AcceptButton_Click(object sender, RoutedEventArgs e)
+        {
+            Subject lesson = new Subject("name", "teacher", "homework");
+
+            if(StartTime.Text == "" || EndTime.Text == "" || 
+                ChoseSubject.Text == "" || ChoseTeacher.Text == ""
+                || ChoseDayOfWeek.Text == "")
+            {
+                MessageBox.Show("Some fields are empty");
+            }
+
+            if (CheckBox.IsChecked == false)
+            {
+                DayOfWeek dayOfWeek;
+                switch (ChoseDayOfWeek.Text)
+                {
+                    case "Monday": dayOfWeek = DayOfWeek.Monday; break;
+                    case "Tuesday": dayOfWeek = DayOfWeek.Tuesday; break;
+                    case "Wednesday": dayOfWeek = DayOfWeek.Wednesday; break;
+                    case "Thursday": dayOfWeek = DayOfWeek.Thursday; break;
+                    case "Friday": dayOfWeek = DayOfWeek.Friday; break;
+                    case "Saturday": dayOfWeek = DayOfWeek.Saturday; break;
+                    case "Sunday": dayOfWeek = DayOfWeek.Sunday; break;
+                    default: throw new Exception("The wrong day of week");
+                }
+
+                new Lesson(lesson, StartTime.Text, EndTime.Text, dayOfWeek);
+                MessageBox.Show("added successfuly");
+
+            }
+            else
+            {
+
+            }
+            Close();
         }
     }
 }

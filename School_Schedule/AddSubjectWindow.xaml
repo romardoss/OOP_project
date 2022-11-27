@@ -43,7 +43,7 @@
         </Style>
     </Window.Resources>
     <Grid Background="#afd274">
-        <Border  Background="#7e685a" Height="300" Width="450"/>
+        <Border  Background="#7e685a" Height="400" Width="450"/>
         <TextBlock FontSize="28" Margin="0,0,0,200"><Run Text="Add new lesson"/></TextBlock>
         <TextBlock Margin="0,0,200,100"><Run Text="Subject:"/></TextBlock>
         <TextBlock Margin="0,0,200,20"><Run Text="Teacher:"/></TextBlock>
@@ -52,13 +52,15 @@
         <TextBlock Margin="169,50,0,0"><Run Text="to"/></TextBlock>
         <ComboBox x:Name="ChoseSubject" Margin="100,0,0,100"/>
         <ComboBox x:Name="ChoseTeacher" Margin="100,0,0,20"/>
-        <TextBox Text="8:30" Margin="50,55,0,0"/>
-        <TextBox Text="9:15" Margin="260,55,0,0"/>
-        <TextBlock Margin="0,110,120,0"><Run Text="One-time lesson"/></TextBlock>
-        <CheckBox Margin="80,115,0,0" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
-        <DatePicker x:Name="DateOfLesson" Margin="0,170,175,0" IsEnabled="False" />
-        <Button Content="Cancel" Width="100" Height="25" Margin="0,230,170,0" Click="Button_Click" />
-        <Button Content="Accept" Width="100" Height="25" Margin="220,230,0,0" Click="Button_Click_1" />
+        <TextBox x:Name="StartTime" Text="8:30" Margin="50,55,0,0"/>
+        <TextBox x:Name="EndTime" Text="9:15" Margin="260,55,0,0"/>
+        <TextBlock Margin="0,110,150,0"><Run Text="Day of week:"/></TextBlock>
+        <ComboBox x:Name="ChoseDayOfWeek" Margin="100,115,0,0"/>
+        <TextBlock Margin="0,170,120,0"><Run Text="One-time lesson"/></TextBlock>
+        <CheckBox x:Name="CheckBox" Margin="80,175,0,0" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
+        <DatePicker x:Name="DateOfLesson" Margin="0,230,175,0" IsEnabled="False" />
+        <Button x:Name="CancelButton" Content="Cancel" Width="100" Height="25" Margin="0,300,172,0" Click="CancelButton_Click" />
+        <Button x:Name="AcceptButton" Content="Accept" Width="100" Height="25" Margin="220,300,0,0" Click="AcceptButton_Click" />
 
     </Grid>
 </Window>
