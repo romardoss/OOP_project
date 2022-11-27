@@ -8,6 +8,8 @@ namespace School_Schedule.Logic.TeacherFolder
 {
     internal abstract class Teacher
     {
+        public static List<Teacher> AllTeachers = new List<Teacher>();
+        public static List<string> AllNames = new List<string>();
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Patronymic { get; set; }
@@ -22,6 +24,8 @@ namespace School_Schedule.Logic.TeacherFolder
             Patronymic = patronymic;
             PhoneNumber = phone;
             Subject = subject;
+            AllNames.Add(name + " " + surname);
+            AllTeachers.Add(this);
         }
 
         public abstract void ChangeInfo();

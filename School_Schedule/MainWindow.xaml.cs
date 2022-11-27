@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using School_Schedule.Logic.SubjectFolder;
+using School_Schedule.Logic.TeacherFolder;
 
 namespace School_Schedule
 {
@@ -31,6 +33,16 @@ namespace School_Schedule
             //MessageBox.Show("You`re so well");
             AddSubjectWindow window = new AddSubjectWindow();
             window.ShowDialog();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            new Subject("Math", "Lidiia", "nothing");
+            new Subject("Physic", "Oleg", "nothing");
+            new Subject("History", "Olesya", "nothing");
+            new Subject("Language", "Liana", "nothing");
+            new SchoolTeacher("Oleg", "Slyva", "Oleksandrovich", "000", "Math", "12");
+            new SchoolTeacher("Andrew", "Slyva", "Oleksandrovich", "000", "Math", "12");
         }
     }
 }

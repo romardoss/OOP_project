@@ -1,66 +1,60 @@
-﻿<Window x:Class="School_Schedule.AddSubjectWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:School_Schedule"
+        xmlns:Collections="clr-namespace:System.Collections;assembly=mscorlib" x:Class="School_Schedule.AddSubjectWindow"
         mc:Ignorable="d"
-        Title="New Lesson" Height="450" Width="800">
+        Title="New Lesson" Height="450" Width="800" Loaded="Window_Loaded">
 
     <Window.Resources>
-        <Style TargetType="TextBlock">
+        <Style TargetType="{x:Type TextBlock}">
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="TextAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="FontSize" Value="20"/>
         </Style>
-        <Style TargetType="ComboBox">
+        <Style TargetType="{x:Type ComboBox}">
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Width" Value="120"/>
         </Style>
-        <Style TargetType="TextBox">
+        <Style TargetType="{x:Type TextBox}">
             <Setter Property="Width" Value="60"/>
             <Setter Property="TextWrapping" Value="NoWrap"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="FontSize" Value="12"/>
         </Style>
-        <Style TargetType="CheckBox">
+        <Style TargetType="{x:Type CheckBox}">
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
         </Style>
-        <Style TargetType="DatePicker">
+        <Style TargetType="{x:Type DatePicker}">
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Height" Value="25"/>
             <Setter Property="Width" Value="100"/>
         </Style>
-        <Style TargetType="Button">
+        <Style TargetType="{x:Type Button}">
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
         </Style>
     </Window.Resources>
     <Grid Background="#afd274">
         <Border  Background="#7e685a" Height="300" Width="450"/>
-        <TextBlock FontSize="28" Margin="0,0,0,200">
-            Add new lesson</TextBlock>
-        <TextBlock Margin="0,0,200,100">
-            Subject:</TextBlock>
-        <TextBlock Margin="0,0,200,20">
-            Teacher:</TextBlock>
-        <TextBlock Margin="0,50,220,0">
-            Time:</TextBlock>
-        <TextBlock Margin="0,50,70,0">
-            from</TextBlock>
-        <TextBlock Margin="169,50,0,0">
-            to</TextBlock>
-        <ComboBox Margin="100,0,0,100"/>
-        <ComboBox Margin="100,0,0,20"/>
+        <TextBlock FontSize="28" Margin="0,0,0,200"><Run Text="Add new lesson"/></TextBlock>
+        <TextBlock Margin="0,0,200,100"><Run Text="Subject:"/></TextBlock>
+        <TextBlock Margin="0,0,200,20"><Run Text="Teacher:"/></TextBlock>
+        <TextBlock Margin="0,50,220,0"><Run Text="Time:"/></TextBlock>
+        <TextBlock Margin="0,50,70,0"><Run Text="from"/></TextBlock>
+        <TextBlock Margin="169,50,0,0"><Run Text="to"/></TextBlock>
+        <ComboBox x:Name="ChoseSubject" Margin="100,0,0,100"/>
+        <ComboBox x:Name="ChoseTeacher" Margin="100,0,0,20"/>
         <TextBox Text="8:30" Margin="50,55,0,0"/>
         <TextBox Text="9:15" Margin="260,55,0,0"/>
-        <TextBlock Margin="0,110,120,0">
-            One-time lesson</TextBlock>
+        <TextBlock Margin="0,110,120,0"><Run Text="One-time lesson"/></TextBlock>
         <CheckBox Margin="80,115,0,0" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
         <DatePicker x:Name="DateOfLesson" Margin="0,170,175,0" IsEnabled="False" />
         <Button Content="Cancel" Width="100" Height="25" Margin="0,230,170,0" Click="Button_Click" />

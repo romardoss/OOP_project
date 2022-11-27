@@ -8,6 +8,8 @@ namespace School_Schedule.Logic.SubjectFolder
 {
     internal class Subject
     {
+        public static List<Subject> AllSubjects = new List<Subject>();
+        public static List<string> AllNames = new List<string>();
         public string Name { get; set; }
         public string Teacher { get; set; }
         public string Homework { get; set; }
@@ -17,6 +19,8 @@ namespace School_Schedule.Logic.SubjectFolder
             Name = name;
             Teacher = teacher;
             Homework = homework;
+            AllSubjects.Add(this);
+            AllNames.Add(Name);
         }
     }
 }

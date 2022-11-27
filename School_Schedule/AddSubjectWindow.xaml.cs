@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using School_Schedule.Logic.SubjectFolder;
+using School_Schedule.Logic.TeacherFolder;
 
 namespace School_Schedule
 {
@@ -42,6 +44,12 @@ namespace School_Schedule
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            ChoseSubject.ItemsSource = Subject.AllNames;
+            ChoseTeacher.ItemsSource = Teacher.AllNames;
         }
     }
 }
