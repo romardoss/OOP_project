@@ -5,23 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:School_Schedule"
         mc:Ignorable="d"
-        Title="Schedule" Height="450" Width="800">
+        Title="Schedule" Height="450" Width="800" >
     <Grid>
-        <ScrollViewer>
-            <Button Content="Додати урок" Height="41" Width="141" Click="Button_Click"/>
-        </ScrollViewer>
-
-        <Rectangle HorizontalAlignment="Left" Height="38" Stroke="Black" VerticalAlignment="Top" Width="790" Margin="0,10,0,0"/>
-        <Rectangle Stroke="Black" RenderTransformOrigin="0.5,0.5" Margin="-377,386,387,10">
-            <Rectangle.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="90"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-
+        <Button Content="Додати урок" Click="Button_Click" 
+                Width="150" Height="100"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="300"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.2*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
     </Grid>
 </Window>

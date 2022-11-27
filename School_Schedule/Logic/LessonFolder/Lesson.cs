@@ -8,5 +8,6 @@ namespace School_Schedule.Logic.LessonFolder
 {
     internal class Lesson
     {
+        
     }
 }

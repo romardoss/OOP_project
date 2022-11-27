@@ -10,27 +10,38 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace School_Schedule
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for AddSubjectWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class AddSubjectWindow : Window
     {
-        public MainWindow()
+        public AddSubjectWindow()
         {
             InitializeComponent();
         }
 
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            DateOfLesson.IsEnabled = true;
+        }
+
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            DateOfLesson.IsEnabled = false;
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //Content = "wow";
-            //MessageBox.Show("You`re so well");
-            AddSubjectWindow window = new AddSubjectWindow();
-            window.ShowDialog();
+            Close();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

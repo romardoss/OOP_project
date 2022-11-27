@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace School_Schedule.Logic.Schedule
+namespace School_Schedule.Logic.ScheduleFolder
 {
     internal class Schedule
     {
+
     }
 }
