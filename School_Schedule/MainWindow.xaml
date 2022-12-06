@@ -7,12 +7,53 @@
         mc:Ignorable="d"
         Title="Schedule" Height="450" Width="800" Loaded="Window_Loaded" >
     <Grid>
-        <Button Content="Додати урок" Click="Button_Click" 
-                Width="150" Height="30"/>
-        <ListBox Grid.Row="1" x:Name="listTest" Margin="66,21,416,21"/>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.1*"/>
             <RowDefinition />
         </Grid.RowDefinitions>
+        <Button Content="Додати урок" Click="Button_Click" 
+                Width="150" Height="30" Grid.Row="0"/>
+        <ScrollViewer Grid.Row="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <Canvas Grid.Column="0" Background="Aqua"/>
+                <Canvas Grid.Column="1" Background="Black"/>
+                <Canvas Grid.Column="2" Background="Bisque"/>
+                <Canvas Grid.Column="3" Background="DeepPink"/>
+                <Canvas Grid.Column="4" Background="Goldenrod"/>
+                <Canvas Grid.Column="5" Background="MintCream"/>
+                <Canvas Grid.Column="6" Background="MediumPurple"/>
+                <Canvas Grid.Column="7" Background="Yellow"/>
+                <Button Grid.Column="5" Panel.ZIndex="1" Height="30" Content="Button"/>
+                <Button Grid.Column="5" Panel.ZIndex="1" Height="30" Content="Button" Margin="0,90,0,-2"/>
+                <Button Grid.Column="5" Panel.ZIndex="1" Height="30" Content="Button" Margin="0,190,0,0"/>
+                <Button Grid.Column="5" Panel.ZIndex="1" Height="30" Content="Button" Margin="0,300,0,0"/>
+                <Button Grid.Column="5" Panel.ZIndex="1" Height="30" Content="Button" Margin="0,400,0,0"/>
+                <Button Grid.Column="5" Panel.ZIndex="1" Height="30" Content="Button" Margin="0,500,0,0"/>
+                <Button Grid.Column="5" Panel.ZIndex="1" Height="30" Content="Button" Margin="0,600,0,0"/>
+                <Button Grid.Column="5" Panel.ZIndex="1" Height="30" Content="Button" Margin="0,700,0,0"/>
+                <Button Grid.Column="4" Height="80" Margin="5, 0, 5, 0" VerticalAlignment="Top">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Subject alalalal alalall alall" Grid.Row="0" Background="MediumPurple" Height="50" FontSize="14" />
+                        <TextBlock Text="Teacher" Grid.Row="1" Background="Yellow" FontSize="12"/>
+                        <TextBlock Text="Time" Grid.Row="2" Background="MintCream" FontSize="12"/>
+                    </Grid>
+                </Button>
+            </Grid>
+        </ScrollViewer>
     </Grid>
 </Window>

@@ -52,10 +52,6 @@ namespace School_Schedule
                 DateTime.Today.Month, DateTime.Today.Day, 19, 30, 0);
             //Lesson l = new Lesson(math, dayOfWeek, start, end);
             //MessageBox.Show(l.IsNow().ToString());
-            listTest.ItemsSource = new List<string> {"Урок 1", "Урок 2",
-            "Урок 3", "Урок 4", "Урок 5", "Урок 6", "Урок 7", "Урок 8",
-            "Урок 9", "Урок 10", "Урок 11", "Урок 12", "Урок 13", "Урок 14",
-            "Урок 15", "Урок 16", "Урок 17", "Урок 18", "Урок 19", "Урок 20", };
         }
     }
 }
