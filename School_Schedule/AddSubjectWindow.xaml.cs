@@ -97,5 +97,11 @@ namespace School_Schedule
             }
             Close();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            AddTeacherWindow window = new AddTeacherWindow();
+            window.ShowDialog();
+        }
     }
 }

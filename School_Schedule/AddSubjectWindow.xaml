@@ -52,6 +52,10 @@
         <TextBlock Margin="169,50,0,0"><Run Text="to"/></TextBlock>
         <ComboBox x:Name="ChoseSubject" Margin="100,0,0,100"/>
         <ComboBox x:Name="ChoseTeacher" Margin="100,0,0,20"/>
+        <Button Height="22" Width="28" Content="+" VerticalContentAlignment="Center" 
+                FontSize="14" Margin="270,0,0,100"/>
+        <Button Height="22" Width="28" Content="+" VerticalContentAlignment="Center" 
+                FontSize="14" Margin="270,0,0,20" Click="Button_Click"/>
         <TextBox x:Name="StartTime" Text="8:30" Margin="50,55,0,0"/>
         <TextBox x:Name="EndTime" Text="9:15" Margin="260,55,0,0"/>
         <TextBlock Margin="0,110,150,0"><Run Text="Day of week:"/></TextBlock>
