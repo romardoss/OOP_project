@@ -7,7 +7,7 @@ using School_Schedule.Logic.SubjectFolder;
 
 namespace School_Schedule.Logic.LessonFolder
 {
-    internal class Lesson
+    public class Lesson
     {
         public Subject Subject { get; set; }
         public DayOfWeek DayOfWeek { get; set; }

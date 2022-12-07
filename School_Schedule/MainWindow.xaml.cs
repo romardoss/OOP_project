@@ -34,6 +34,11 @@ namespace School_Schedule
             //MessageBox.Show("You`re so well");
             AddSubjectWindow window = new AddSubjectWindow();
             window.ShowDialog();
+            Lesson newLesson = window.NewLesson;
+            CreateLesson(newLesson);
+            //отримую з методів іншого вікна значення нового предмету
+            //закриваю процес для вікна
+            //створюю новий урок у розкладі
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -52,6 +57,54 @@ namespace School_Schedule
                 DateTime.Today.Month, DateTime.Today.Day, 19, 30, 0);
             //Lesson l = new Lesson(math, dayOfWeek, start, end);
             //MessageBox.Show(l.IsNow().ToString());
+
+
+            CreateTimeLine();
         }
+
+        private void CreateLesson(Lesson lesson)
+        {
+            int top = lesson.Start.Hour *60 + lesson.Start.Minute;
+            int bottom = lesson.End.Hour*60 + lesson.End.Minute;
+            int height = bottom - top;
+            //MessageBox.Show($"{top} {bottom} {height}");
+
+            Button lessonButton = new Button
+            {
+                Width = Monday.ActualWidth,
+                Height = height,
+                Content = $"{lesson.Subject.Name}\n{lesson.Subject.Teacher}" +
+                $"\n{lesson.Start.Hour}:{lesson.Start.Minute}-" +
+                $"{lesson.End.Hour}:{lesson.End.Minute}",
+
+            };
+            Canvas.SetTop(lessonButton, top);
+            switch (lesson.DayOfWeek)
+            {
+                case DayOfWeek.Monday: Monday.Children.Add(lessonButton); break;
+                case DayOfWeek.Tuesday: Tuesday.Children.Add(lessonButton); break;
+                case DayOfWeek.Wednesday: Wednesday.Children.Add(lessonButton); break;
+                case DayOfWeek.Thursday: Thursday.Children.Add(lessonButton); break;
+                case DayOfWeek.Friday: Friday.Children.Add(lessonButton); break;
+                case DayOfWeek.Saturday: Saturday.Children.Add(lessonButton); break;
+                case DayOfWeek.Sunday: Sunday.Children.Add(lessonButton); break;
+            }
+        }
+
+        private void CreateTimeLine()
+        {
+            for (int i = 0; i < 24; i++)
+            {
+                TextBlock textBlock = new TextBlock
+                {
+                    Text = $"{i}:00",
+                    FontSize = 16,
+                    TextAlignment = TextAlignment.Center,
+                };
+                Canvas.SetTop(textBlock, i * 60);
+                TimeLineCanvas.Children.Add(textBlock);
+            }
+        }
+
     }
 }

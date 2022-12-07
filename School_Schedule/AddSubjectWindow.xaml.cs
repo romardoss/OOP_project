@@ -20,8 +20,12 @@ namespace School_Schedule
     /// <summary>
     /// Interaction logic for AddSubjectWindow.xaml
     /// </summary>
+
     public partial class AddSubjectWindow : Window
     {
+
+        public Lesson NewLesson { get; set; }
+
         public AddSubjectWindow()
         {
             InitializeComponent();
@@ -56,9 +60,12 @@ namespace School_Schedule
 
         private void AcceptButton_Click(object sender, RoutedEventArgs e)
         {
-            Subject lesson = new Subject("name", "teacher", "homework");
+            //MessageBox.Show($"{Subject.AllSubjects[0].Name} == {ChoseSubject.Text}");
+            Subject answerSubject = Subject.AllSubjects.First(x => x.Name == ChoseSubject.Text);
+            //MessageBox.Show(answerSubject.Name);
+            //answerSubject = new Subject("name", "teacher", "homework");
 
-            if(StartTime.Text == "" || EndTime.Text == "" || 
+            if (StartTime.Text == "" || EndTime.Text == "" || 
                 ChoseSubject.Text == "" || ChoseTeacher.Text == ""
                 || ChoseDayOfWeek.Text == "")
             {
@@ -80,7 +87,7 @@ namespace School_Schedule
                     default: throw new Exception("The wrong day of week");
                 }
 
-                new Lesson(lesson, StartTime.Text, EndTime.Text, dayOfWeek);
+                NewLesson = new Lesson(answerSubject, StartTime.Text, EndTime.Text, dayOfWeek);
                 MessageBox.Show("added successfuly");
 
             }

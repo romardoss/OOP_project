@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace School_Schedule.Logic.SubjectFolder
 {
-    internal class Subject
+    public class Subject
     {
         public static List<Subject> AllSubjects = new List<Subject>();
         public static List<string> AllNames = new List<string>();
+        //треба зробити так, щоб цього списку не було. можна використовувати
+        //пошук за лямбдою
         public string Name { get; set; }
         public string Teacher { get; set; }
         public string Homework { get; set; }
