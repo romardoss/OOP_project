@@ -24,33 +24,39 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
         </Style>
-        <Style TargetType="{x:Type DatePicker}">
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Height" Value="25"/>
-            <Setter Property="Width" Value="100"/>
-        </Style>
         <Style TargetType="{x:Type Button}">
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
         </Style>
+        <Style TargetType="RadioButton">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
     </Window.Resources>
     <Grid Background="#afd274">
         <Border  Background="#7e685a" Height="400" Width="450"/>
-        <TextBlock FontSize="28" Margin="0,0,0,200"><Run Text="Add new teacher"/></TextBlock>
-        <TextBlock Margin="0,0,200,100"><Run Text="Name:"/></TextBlock>
-        <TextBox  Margin="100,0,0,100"/>
-        <TextBlock Margin="0,0,200,20"><Run Text="Surname:"/></TextBlock>
-        <TextBox Margin="100,0,0,20"/>
-        <TextBlock Margin="0,50,220,0"><Run Text="Patronymic:"/></TextBlock>
-        <TextBox Margin="100,50,0,0"/>
-        <TextBlock Margin="0,120,220,0"><Run Text="Phone Number:"/></TextBlock>
-        <TextBox Margin="100,120,0,0"/>
-        <TextBlock Margin="0,190,220,0"><Run Text="Additional info:"/></TextBlock>
-        <TextBox Margin="100,190,0,0"/>
-        <Button x:Name="CancelButton" Content="Cancel" Width="100" Height="25" Margin="0,300,172,0" />
-        <Button x:Name="AcceptButton" Content="Accept" Width="100" Height="25" Margin="220,300,0,0" />
+        <TextBlock FontSize="28" Margin="0,0,0,300"><Run Text="Add new teacher"/></TextBlock>
+        <TextBlock Margin="0,0,200,200"><Run Text="Name:"/></TextBlock>
+        <TextBox x:Name="NameField"  Margin="150,0,0,200"/>
+        <TextBlock Margin="0,0,200,120"><Run Text="Surname:"/></TextBlock>
+        <TextBox x:Name="SurnameField" Margin="150,0,0,120"/>
+        <TextBlock x:Name="PatronymicField" Margin="0,0,220,50"><Run Text="Patronymic:"/></TextBlock>
+        <TextBox Margin="150,0,0,50"/>
+        <TextBlock Margin="0,20,220,0"><Run Text="Phone Number:"/></TextBlock>
+        <TextBox x:Name="PhoneNumberField" Margin="150,20,0,0"/>
+        <RadioButton x:Name="SchoolTeacherButton" Content="School teacher" Margin="0,90,220,0" Checked="SchoolTeacherButton_Checked"/>
+        <RadioButton x:Name="PrivateTeacherButton" Content="Private teacher" Margin="150,90,0,0" Checked="PrivateTeacherButton_Checked" />
+        <TextBox x:Name="OfficeField" Margin="0,140,200,0" Text="Office number"/>
+        <TextBox x:Name="PriceField" Margin="150,140,0,0" Text="Price of the lesson"/>
+        <TextBox x:Name="AddressField" Margin="150,200,0,0" Text="Address"/>
+        <TextBlock x:Name="AdditionalInfoField" Margin="0,260,220,0"><Run Text="Additional info:"/></TextBlock>
+        <TextBox Margin="150,262,0,0"/>
+        <Button x:Name="CancelButton" Content="Cancel" Width="100" Height="25" Margin="0,330,172,0" Click="CancelButton_Click" />
+        <Button x:Name="AcceptButton" Content="Accept" Width="100" Height="25" Margin="220,330,0,0" Click="AcceptButton_Click" />
+
 
     </Grid>
 </Window>

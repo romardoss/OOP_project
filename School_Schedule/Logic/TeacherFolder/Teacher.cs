@@ -16,14 +16,13 @@ namespace School_Schedule.Logic.TeacherFolder
         public string PhoneNumber { get; set; }
         public string Subject { get; set; }
 
-        public Teacher(string name, string surname, string patronymic, 
-            string phone, string subject)
+        public Teacher(string name, string surname = "", string patronymic = "", 
+            string phone = "")
         {
             Name = name;
             Surname = surname;
             Patronymic = patronymic;
             PhoneNumber = phone;
-            Subject = subject;
             AllNames.Add(name + " " + surname);
             AllTeachers.Add(this);
         }

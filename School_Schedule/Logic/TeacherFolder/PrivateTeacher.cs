@@ -12,8 +12,8 @@ namespace School_Schedule.Logic.TeacherFolder
         public int PriceOfLesson { get; set; }
 
         public PrivateTeacher(string name, string surname, string patronymic, 
-            string phone, string subject, string address, int price) 
-            : base(name, surname, patronymic, phone, subject)
+            string phone, string address, int price) 
+            : base(name, surname, patronymic, phone)
         {
             Address = address;
             PriceOfLesson = price;

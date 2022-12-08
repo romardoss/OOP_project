@@ -34,8 +34,11 @@ namespace School_Schedule
             //MessageBox.Show("You`re so well");
             AddSubjectWindow window = new AddSubjectWindow();
             window.ShowDialog();
-            Lesson newLesson = window.NewLesson;
-            CreateLesson(newLesson);
+            if(window.NewLesson != null)
+            {
+                Lesson newLesson = window.NewLesson;
+                CreateLesson(newLesson);
+            }
             //отримую з методів іншого вікна значення нового предмету
             //закриваю процес для вікна
             //створюю новий урок у розкладі
@@ -47,8 +50,8 @@ namespace School_Schedule
             new Subject("Physic", "Oleg", "nothing");
             new Subject("History", "Olesya", "nothing");
             new Subject("Language", "Liana", "nothing");
-            new SchoolTeacher("Oleg", "Slyva", "Oleksandrovich", "000", "Math", "12");
-            new SchoolTeacher("Andrew", "Slyva", "Oleksandrovich", "000", "Math", "12");
+            new SchoolTeacher("Oleg", "Slyva", "Oleksandrovich", "000", "12");
+            new SchoolTeacher("Andrew", "Slyva", "Oleksandrovich", "000", "12");
             //MessageBox.Show(DateTime.Today.DayOfWeek.ToString());
             DayOfWeek dayOfWeek = DayOfWeek.Monday;
             DateTime start = new DateTime(DateTime.Today.Year, 

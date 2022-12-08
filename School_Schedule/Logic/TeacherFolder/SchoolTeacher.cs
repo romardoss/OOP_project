@@ -11,8 +11,8 @@ namespace School_Schedule.Logic.TeacherFolder
         public string OfficeNumber { get; set; }
 
         public SchoolTeacher(string name, string surname, string patronymic, 
-            string phone, string subject, string officeNumber)
-            : base(name, surname, patronymic, phone, subject)
+            string phone, string officeNumber)
+            : base(name, surname, patronymic, phone)
         {
             OfficeNumber = officeNumber;
         }

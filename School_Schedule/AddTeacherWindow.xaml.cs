@@ -11,6 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using School_Schedule.Logic.SubjectFolder;
+using School_Schedule.Logic.TeacherFolder;
+using School_Schedule.Logic.LessonFolder;
 
 namespace School_Schedule
 {
@@ -22,6 +25,47 @@ namespace School_Schedule
         public AddTeacherWindow()
         {
             InitializeComponent();
+        }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void AcceptButton_Click(object sender, RoutedEventArgs e)
+        {
+            if ((NameField.Text != "") && (SurnameField.Text != "" ||
+                PatronymicField.Text != "") &&
+                (SchoolTeacherButton.IsChecked == true || 
+                PrivateTeacherButton.IsChecked == true))
+            {
+                //можна створювати учителя лише якщо є прізвище та ім'я,
+                //або ім'я та по-батькові
+                //і обов'язково повинна бути натиснута якась радіо-кнопка
+                //створюється об'єкт учителя
+
+                if(SchoolTeacherButton.IsChecked == true)
+                {
+                    //SchoolTeacher teacher = new SchoolTeacher(NameField.Text, 
+                        //SurnameField.Text, PatronymicField.Text, PhoneNumberField.Text);
+                }
+                //Teacher newTeacher = new Teacher(NameField.Text, 
+                //  SurnameField.Text, PatronymicField.Text, PhoneNumberField.Text);
+            }
+        }
+
+        private void PrivateTeacherButton_Checked(object sender, RoutedEventArgs e)
+        {
+            PriceField.IsEnabled = true;
+            AddressField.IsEnabled = true;
+            OfficeField.IsEnabled = false;
+        }
+
+        private void SchoolTeacherButton_Checked(object sender, RoutedEventArgs e)
+        {
+            OfficeField.IsEnabled = true;
+            PriceField.IsEnabled = false;
+            AddressField.IsEnabled = false;
         }
     }
 }
