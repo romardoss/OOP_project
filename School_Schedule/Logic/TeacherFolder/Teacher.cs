@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace School_Schedule.Logic.TeacherFolder
 {
-    internal abstract class Teacher
+    public abstract class Teacher
     {
         public static List<Teacher> AllTeachers = new List<Teacher>();
         public static List<string> AllNames = new List<string>();
@@ -23,7 +23,7 @@ namespace School_Schedule.Logic.TeacherFolder
             Surname = surname;
             Patronymic = patronymic;
             PhoneNumber = phone;
-            AllNames.Add(name + " " + surname);
+            AllNames.Add(name);
             AllTeachers.Add(this);
         }
 

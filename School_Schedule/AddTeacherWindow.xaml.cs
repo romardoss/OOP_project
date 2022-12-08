@@ -46,11 +46,26 @@ namespace School_Schedule
 
                 if(SchoolTeacherButton.IsChecked == true)
                 {
-                    //SchoolTeacher teacher = new SchoolTeacher(NameField.Text, 
-                        //SurnameField.Text, PatronymicField.Text, PhoneNumberField.Text);
+                    new SchoolTeacher(NameField.Text, 
+                        SurnameField.Text, PatronymicField.Text, PhoneNumberField.Text,
+                        OfficeField.Text );
+                    MessageBox.Show("Added succesfully");
+                }
+                else
+                {
+                    new PrivateTeacher(NameField.Text,
+                        SurnameField.Text, PatronymicField.Text, PhoneNumberField.Text,
+                        AddressField.Text, int.Parse(PriceField.Text));
+                    MessageBox.Show("Added succesfully");
                 }
                 //Teacher newTeacher = new Teacher(NameField.Text, 
                 //  SurnameField.Text, PatronymicField.Text, PhoneNumberField.Text);
+
+                Close();
+            }
+            else
+            {
+                MessageBox.Show("Some neccessary fiels are empty");
             }
         }
 

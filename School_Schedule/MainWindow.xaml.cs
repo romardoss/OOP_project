@@ -46,10 +46,10 @@ namespace School_Schedule
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Subject math = new Subject("Math", "Lidiia", "nothing");
-            new Subject("Physic", "Oleg", "nothing");
-            new Subject("History", "Olesya", "nothing");
-            new Subject("Language", "Liana", "nothing");
+            Subject math = new Subject("Math", "nothing");
+            new Subject("Physic", "nothing");
+            new Subject("History", "nothing");
+            new Subject("Language", "nothing");
             new SchoolTeacher("Oleg", "Slyva", "Oleksandrovich", "000", "12");
             new SchoolTeacher("Andrew", "Slyva", "Oleksandrovich", "000", "12");
             //MessageBox.Show(DateTime.Today.DayOfWeek.ToString());
@@ -76,7 +76,7 @@ namespace School_Schedule
             {
                 Width = Monday.ActualWidth,
                 Height = height,
-                Content = $"{lesson.Subject.Name}\n{lesson.Subject.Teacher}" +
+                Content = $"{lesson.Subject.Name}\n{lesson.Teacher.Name}" +
                 $"\n{lesson.Start.Hour}:{lesson.Start.Minute}-" +
                 $"{lesson.End.Hour}:{lesson.End.Minute}",
 

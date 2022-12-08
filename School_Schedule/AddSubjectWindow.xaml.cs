@@ -60,10 +60,8 @@ namespace School_Schedule
 
         private void AcceptButton_Click(object sender, RoutedEventArgs e)
         {
-            //MessageBox.Show($"{Subject.AllSubjects[0].Name} == {ChoseSubject.Text}");
-            Subject answerSubject = Subject.AllSubjects.First(x => x.Name == ChoseSubject.Text);
-            //MessageBox.Show(answerSubject.Name);
-            //answerSubject = new Subject("name", "teacher", "homework");
+            Subject subject = Subject.AllSubjects.First(x => x.Name == ChoseSubject.Text);
+            Teacher teacher = Teacher.AllTeachers.First(x => x.Name == ChoseTeacher.Text);
 
             if (StartTime.Text == "" || EndTime.Text == "" || 
                 ChoseSubject.Text == "" || ChoseTeacher.Text == ""
@@ -87,7 +85,7 @@ namespace School_Schedule
                     default: throw new Exception("The wrong day of week");
                 }
 
-                NewLesson = new Lesson(answerSubject, StartTime.Text, EndTime.Text, dayOfWeek);
+                NewLesson = new Lesson(subject, teacher, StartTime.Text, EndTime.Text, dayOfWeek);
                 MessageBox.Show("added successfuly");
 
             }

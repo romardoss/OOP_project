@@ -4,21 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using School_Schedule.Logic.SubjectFolder;
+using School_Schedule.Logic.TeacherFolder;
 
 namespace School_Schedule.Logic.LessonFolder
 {
     public class Lesson
     {
         public Subject Subject { get; set; }
+        public Teacher Teacher { get; set; }
         public DayOfWeek DayOfWeek { get; set; }
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
         static readonly List<Lesson> AllLessons = new List<Lesson>();
 
-        public Lesson(Subject subject, string timeStart, string timeEnd, DayOfWeek day)
+        public Lesson(Subject subject, Teacher teacher, string timeStart, string timeEnd, DayOfWeek day)
         {
             Subject = subject;
             DayOfWeek = day;
+            Teacher = teacher;
 
             string[] timeComponents = timeStart.Split(':');
             int hours = int.Parse(timeComponents[0]);

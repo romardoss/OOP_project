@@ -5,19 +5,51 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:School_Schedule"
         mc:Ignorable="d"
-        Title="Schedule" Height="450" Width="800" Loaded="Window_Loaded" >
+        Title="Schedule" Height="450" Width="800" Loaded="Window_Loaded" Background="#FF7E685A" >
+    <Window.Resources>
+        <Style TargetType="Canvas">
+            <Setter Property="Background" Value="#c2c9cf"/>
+            <Setter Property="Margin" Value="0.5, 0, 0.5, 0"/>
+        </Style>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+    </Window.Resources>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="11*"/>
-            <ColumnDefinition Width="89*"/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.1*"/>
-            <RowDefinition />
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
         <Button Content="Додати урок" Click="Button_Click" 
-                Width="150" Height="30" Grid.Row="0" Grid.Column="1" Margin="237,5,325,4"/>
-        <ScrollViewer Grid.ColumnSpan="2" Margin="0,39,0,0" Grid.RowSpan="2">
+                Width="150" Height="30" Grid.Row="0" Margin="325,10,325,10"/>
+        <Grid Grid.Row="1" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="15"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="Time" Background="#afd274"/>
+            <TextBlock Grid.Column="1" Text="Monday" Background="#afd274"/>
+            <TextBlock Grid.Column="2" Text="Tuesday" Background="#afd274"/>
+            <TextBlock Grid.Column="3" Text="Wednesday" Background="#afd274"/>
+            <TextBlock Grid.Column="4" Text="Thursday" Background="#afd274"/>
+            <TextBlock Grid.Column="5" Text="Friday" Background="#afd274"/>
+            <TextBlock Grid.Column="6" Text="Saturday" Background="#afd274"/>
+            <TextBlock Grid.Column="7" Text="Sunday" Background="#afd274"/>
+            <TextBlock Grid.Column="8" Background="#afd274"/>
+        </Grid>
+        <ScrollViewer Grid.ColumnSpan="2" Grid.Row="2">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="50" />
@@ -29,14 +61,14 @@
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
-                <Canvas x:Name="TimeLineCanvas" Grid.Column="0" Background="Aqua" Height="1440"/>
-                <Canvas x:Name="Monday" Grid.Column="1" Background="Black"/>
-                <Canvas x:Name="Tuesday" Grid.Column="2" Background="Bisque"/>
-                <Canvas x:Name="Wednesday" Grid.Column="3" Background="DeepPink"/>
-                <Canvas x:Name="Thursday" Grid.Column="4" Background="Goldenrod"/>
-                <Canvas x:Name="Friday" Grid.Column="5" Background="MintCream"/>
-                <Canvas x:Name="Saturday" Grid.Column="6" Background="MediumPurple"/>
-                <Canvas x:Name="Sunday" Grid.Column="7" Background="Yellow"/>
+                <Canvas x:Name="TimeLineCanvas" Grid.Column="0" Background="#afd274" Height="1440"/>
+                <Canvas x:Name="Monday" Grid.Column="1"/>
+                <Canvas x:Name="Tuesday" Grid.Column="2"/>
+                <Canvas x:Name="Wednesday" Grid.Column="3"/>
+                <Canvas x:Name="Thursday" Grid.Column="4"/>
+                <Canvas x:Name="Friday" Grid.Column="5"/>
+                <Canvas x:Name="Saturday" Grid.Column="6"/>
+                <Canvas x:Name="Sunday" Grid.Column="7"/>
                 <Button Grid.Column="5" Panel.ZIndex="1" Height="30" Content="Button"/>
                 <Button Grid.Column="5" Panel.ZIndex="1" Height="30" Content="Button" Margin="0,90,0,-2"/>
                 <Button Grid.Column="5" Panel.ZIndex="1" Height="30" Content="Button" Margin="0,190,0,0"/>

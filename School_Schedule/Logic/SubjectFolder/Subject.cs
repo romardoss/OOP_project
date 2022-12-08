@@ -13,13 +13,11 @@ namespace School_Schedule.Logic.SubjectFolder
         //треба зробити так, щоб цього списку не було. можна використовувати
         //пошук за лямбдою
         public string Name { get; set; }
-        public string Teacher { get; set; }
         public string Homework { get; set; }
 
-        public Subject(string name, string teacher, string homework)
+        public Subject(string name, string homework)
         {
             Name = name;
-            Teacher = teacher;
             Homework = homework;
             AllSubjects.Add(this);
             AllNames.Add(Name);
