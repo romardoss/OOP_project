@@ -14,7 +14,6 @@ namespace School_Schedule.Logic.TeacherFolder
         public string Surname { get; set; }
         public string Patronymic { get; set; }
         public string PhoneNumber { get; set; }
-        public string Subject { get; set; }
 
         public Teacher(string name, string surname = "", string patronymic = "", 
             string phone = "")

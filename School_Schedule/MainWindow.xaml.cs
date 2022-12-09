@@ -56,14 +56,11 @@ namespace School_Schedule
             new Subject("Language", "nothing", "", "");
             new SchoolTeacher("Oleg", "Slyva", "Oleksandrovich", "000", "12");
             new SchoolTeacher("Andrew", "Slyva", "Oleksandrovich", "000", "12");
-            //MessageBox.Show(DateTime.Today.DayOfWeek.ToString());
-            DayOfWeek dayOfWeek = DayOfWeek.Monday;
-            DateTime start = new DateTime(DateTime.Today.Year, 
-                DateTime.Today.Month, DateTime.Today.Day, 16, 30, 0);
-            DateTime end = new DateTime(DateTime.Today.Year,
-                DateTime.Today.Month, DateTime.Today.Day, 19, 30, 0);
-            //Lesson l = new Lesson(math, dayOfWeek, start, end);
-            //MessageBox.Show(l.IsNow().ToString());
+            //DayOfWeek dayOfWeek = DayOfWeek.Monday;
+            //DateTime start = new DateTime(DateTime.Today.Year, 
+            //    DateTime.Today.Month, DateTime.Today.Day, 16, 30, 0);
+            //DateTime end = new DateTime(DateTime.Today.Year,
+            //    DateTime.Today.Month, DateTime.Today.Day, 19, 30, 0);
 
 
             CreateTimeLine();
@@ -176,13 +173,18 @@ namespace School_Schedule
             //і ще має бути функція зміни кольору з червоного на зелений, якщо урок уже триває
         }
 
-        private void Monday_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if(e.OriginalSource is TextBlock)
+            object originalSource = e.OriginalSource;
+            if (originalSource is TextBlock block)
             {
-                if (LessonButtons.ContainsKey((TextBlock)e.OriginalSource))
+                if (LessonButtons.ContainsKey(block))
                 {
-                    MessageBox.Show("Success!");
+                    if (!LessonButtons.TryGetValue(block, out Lesson lesson))
+                    {
+                        return;
+                    }
+                    lesson.ShowInfo();
                 }
             }
         }

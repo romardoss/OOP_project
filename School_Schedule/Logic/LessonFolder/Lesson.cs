@@ -44,5 +44,11 @@ namespace School_Schedule.Logic.LessonFolder
                 && DateTime.Today.DayOfWeek == DayOfWeek;
         }
 
+        public void ShowInfo()
+        {
+            LessonShowInfo info = new LessonShowInfo(this);
+            info.ShowDialog();
+        }
+
     }
 }
