@@ -23,6 +23,9 @@ namespace School_Schedule
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        private readonly Dictionary<TextBlock, Lesson> LessonButtons = new Dictionary<TextBlock, Lesson>();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -38,6 +41,7 @@ namespace School_Schedule
             {
                 Lesson newLesson = window.NewLesson;
                 CreateLesson(newLesson);
+                RefreshButton_Click();
             }
             //отримую з методів іншого вікна значення нового предмету
             //закриваю процес для вікна
@@ -46,10 +50,10 @@ namespace School_Schedule
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Subject math = new Subject("Math", "nothing");
-            new Subject("Physic", "nothing");
-            new Subject("History", "nothing");
-            new Subject("Language", "nothing");
+            new Subject("Math", "nothing", "", "");
+            new Subject("Physic", "nothing", "", "");
+            new Subject("History", "nothing", "", "");
+            new Subject("Language", "nothing", "", "");
             new SchoolTeacher("Oleg", "Slyva", "Oleksandrovich", "000", "12");
             new SchoolTeacher("Andrew", "Slyva", "Oleksandrovich", "000", "12");
             //MessageBox.Show(DateTime.Today.DayOfWeek.ToString());
@@ -63,6 +67,8 @@ namespace School_Schedule
 
 
             CreateTimeLine();
+            CreateCurrentTimeLine();
+            RefreshButton_Click();
         }
 
         private void CreateLesson(Lesson lesson)
@@ -70,16 +76,33 @@ namespace School_Schedule
             int top = lesson.Start.Hour *60 + lesson.Start.Minute;
             int bottom = lesson.End.Hour*60 + lesson.End.Minute;
             int height = bottom - top;
-            //MessageBox.Show($"{top} {bottom} {height}");
 
-            Button lessonButton = new Button
+            string text;
+            if (height >= 60)
             {
+                text = $"{lesson.Subject.Name}\n{lesson.Teacher.Name}" +
+                    $"\n{lesson.Start.Hour}:{lesson.Start.Minute}-" +
+                    $"{lesson.End.Hour}:{lesson.End.Minute}";
+            }
+            else if (height > 40)
+            {
+                text = $"{lesson.Subject.Name}\n{lesson.Start.Hour}:{lesson.Start.Minute}-" +
+                    $"{lesson.End.Hour}:{lesson.End.Minute}";
+            }
+            else
+            {
+                text = $"{lesson.Subject.Name}";
+            }
+
+            TextBlock lessonButton = new TextBlock
+            {
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+                Text = text,
+                FontSize = 14,
                 Width = Monday.ActualWidth,
                 Height = height,
-                Content = $"{lesson.Subject.Name}\n{lesson.Teacher.Name}" +
-                $"\n{lesson.Start.Hour}:{lesson.Start.Minute}-" +
-                $"{lesson.End.Hour}:{lesson.End.Minute}",
-
+                Background = new SolidColorBrush(Color.FromRgb(231, 113, 125)),
             };
             Canvas.SetTop(lessonButton, top);
             switch (lesson.DayOfWeek)
@@ -92,6 +115,7 @@ namespace School_Schedule
                 case DayOfWeek.Saturday: Saturday.Children.Add(lessonButton); break;
                 case DayOfWeek.Sunday: Sunday.Children.Add(lessonButton); break;
             }
+            LessonButtons.Add(lessonButton, lesson);
         }
 
         private void CreateTimeLine()
@@ -109,5 +133,58 @@ namespace School_Schedule
             }
         }
 
+        private void CreateCurrentTimeLine()
+        {
+            Rectangle currentTimeLine = new Rectangle
+            {
+                Height = 2,
+                Width = ActualWidth,
+                StrokeThickness = 2,
+                Stroke = new SolidColorBrush(Color.FromArgb(40, 126, 104, 90)),
+                VerticalAlignment = VerticalAlignment.Top,
+                HorizontalAlignment = HorizontalAlignment.Left,
+            };
+            Canvas.SetTop(currentTimeLine, DateTime.Now.Hour * 60 + DateTime.Now.Minute);
+            TimeLineCanvas.Children.Add(currentTimeLine);
+
+            TextBlock currentTime = new TextBlock
+            {
+                Text = $"{DateTime.Now.Hour}:{DateTime.Now.Minute}",
+                FontSize = 10,
+                Background = new SolidColorBrush(Color.FromRgb(173, 210, 117)),
+        };
+            Canvas.SetTop(currentTime, DateTime.Now.Hour * 60 + DateTime.Now.Minute);
+            TimeLineCanvas.Children.Add(currentTime);
+        }
+
+        private void SetCurrentLesson()
+        {
+            try
+            {
+                TextBlock currentLesson = LessonButtons.First(x => x.Value.IsNow()).Key;
+                currentLesson.Background = new SolidColorBrush(Color.FromRgb(173, 210, 117));
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void RefreshButton_Click(object sender=null, RoutedEventArgs e=null)
+        {
+            SetCurrentLesson();
+            //і ще має бути функція зміни кольору з червоного на зелений, якщо урок уже триває
+        }
+
+        private void Monday_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if(e.OriginalSource is TextBlock)
+            {
+                if (LessonButtons.ContainsKey((TextBlock)e.OriginalSource))
+                {
+                    MessageBox.Show("Success!");
+                }
+            }
+        }
     }
 }

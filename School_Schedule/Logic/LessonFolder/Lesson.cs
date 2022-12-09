@@ -15,7 +15,7 @@ namespace School_Schedule.Logic.LessonFolder
         public DayOfWeek DayOfWeek { get; set; }
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
-        static readonly List<Lesson> AllLessons = new List<Lesson>();
+        public static readonly List<Lesson> AllLessons = new List<Lesson>();
 
         public Lesson(Subject subject, Teacher teacher, string timeStart, string timeEnd, DayOfWeek day)
         {

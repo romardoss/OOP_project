@@ -18,3 +18,5 @@ E:\all_projects\OOP_new\School_Schedule\School_Schedule\obj\Debug\AddSubjectWind
 E:\all_projects\OOP_new\School_Schedule\School_Schedule\obj\Debug\AddSubjectWindow.baml
 E:\all_projects\OOP_new\School_Schedule\School_Schedule\obj\Debug\AddTeacherWindow.g.cs
 E:\all_projects\OOP_new\School_Schedule\School_Schedule\obj\Debug\AddTeacherWindow.baml
+E:\all_projects\OOP_new\School_Schedule\School_Schedule\obj\Debug\CreateSubjectWindow.g.cs
+E:\all_projects\OOP_new\School_Schedule\School_Schedule\obj\Debug\CreateSubjectWindow.baml

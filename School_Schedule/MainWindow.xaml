@@ -18,6 +18,18 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="FontSize" Value="14"/>
         </Style>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#e7717d"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+        <Style TargetType="Rectangle">
+            <Setter Property="Grid.ColumnSpan" Value="8"/>
+        </Style>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -26,7 +38,10 @@
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
         <Button Content="Додати урок" Click="Button_Click" 
-                Width="150" Height="30" Grid.Row="0" Margin="325,10,325,10"/>
+                Width="150" Height="30" Background="#afd274"/>
+        <Button x:Name="RefreshButton" Content="Refresh" 
+                Width="100" Height="30" Background="#afd274" HorizontalAlignment="Left" Margin="20,0,0,0" Click="RefreshButton_Click" 
+                />
         <Grid Grid.Row="1" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50"/>
@@ -62,22 +77,15 @@
                     <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
                 <Canvas x:Name="TimeLineCanvas" Grid.Column="0" Background="#afd274" Height="1440"/>
-                <Canvas x:Name="Monday" Grid.Column="1"/>
-                <Canvas x:Name="Tuesday" Grid.Column="2"/>
-                <Canvas x:Name="Wednesday" Grid.Column="3"/>
-                <Canvas x:Name="Thursday" Grid.Column="4"/>
-                <Canvas x:Name="Friday" Grid.Column="5"/>
-                <Canvas x:Name="Saturday" Grid.Column="6"/>
-                <Canvas x:Name="Sunday" Grid.Column="7"/>
-                <Button Grid.Column="5" Panel.ZIndex="1" Height="30" Content="Button"/>
-                <Button Grid.Column="5" Panel.ZIndex="1" Height="30" Content="Button" Margin="0,90,0,-2"/>
-                <Button Grid.Column="5" Panel.ZIndex="1" Height="30" Content="Button" Margin="0,190,0,0"/>
-                <Button Grid.Column="5" Panel.ZIndex="1" Height="30" Content="Button" Margin="0,300,0,0"/>
-                <Button Grid.Column="5" Panel.ZIndex="1" Height="30" Content="Button" Margin="0,400,0,0"/>
-                <Button Grid.Column="5" Panel.ZIndex="1" Height="30" Content="Button" Margin="0,500,0,0"/>
-                <Button Grid.Column="5" Panel.ZIndex="1" Height="30" Content="Button" Margin="0,600,0,0"/>
-                <Button Grid.Column="5" Panel.ZIndex="1" Height="30" Content="Button" Margin="0,700,0,0"/>
+                <Canvas x:Name="Monday" Grid.Column="1" Panel.ZIndex="-1" MouseLeftButtonDown="Monday_MouseLeftButtonDown"/>
+                <Canvas x:Name="Tuesday" Grid.Column="2" Panel.ZIndex="-1"/>
+                <Canvas x:Name="Wednesday" Grid.Column="3" Panel.ZIndex="-1"/>
+                <Canvas x:Name="Thursday" Grid.Column="4" Panel.ZIndex="-1"/>
+                <Canvas x:Name="Friday" Grid.Column="5" Panel.ZIndex="-1"/>
+                <Canvas x:Name="Saturday" Grid.Column="6" Panel.ZIndex="-1"/>
+                <Canvas x:Name="Sunday" Grid.Column="7" Panel.ZIndex="-1"/>
             </Grid>
+            
         </ScrollViewer>
     </Grid>
 </Window>

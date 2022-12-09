@@ -60,8 +60,7 @@ namespace School_Schedule
 
         private void AcceptButton_Click(object sender, RoutedEventArgs e)
         {
-            Subject subject = Subject.AllSubjects.First(x => x.Name == ChoseSubject.Text);
-            Teacher teacher = Teacher.AllTeachers.First(x => x.Name == ChoseTeacher.Text);
+            
 
             if (StartTime.Text == "" || EndTime.Text == "" || 
                 ChoseSubject.Text == "" || ChoseTeacher.Text == ""
@@ -69,37 +68,52 @@ namespace School_Schedule
             {
                 MessageBox.Show("Some fields are empty");
             }
-
-            if (CheckBox.IsChecked == false)
-            {
-                DayOfWeek dayOfWeek;
-                switch (ChoseDayOfWeek.Text)
-                {
-                    case "Monday": dayOfWeek = DayOfWeek.Monday; break;
-                    case "Tuesday": dayOfWeek = DayOfWeek.Tuesday; break;
-                    case "Wednesday": dayOfWeek = DayOfWeek.Wednesday; break;
-                    case "Thursday": dayOfWeek = DayOfWeek.Thursday; break;
-                    case "Friday": dayOfWeek = DayOfWeek.Friday; break;
-                    case "Saturday": dayOfWeek = DayOfWeek.Saturday; break;
-                    case "Sunday": dayOfWeek = DayOfWeek.Sunday; break;
-                    default: throw new Exception("The wrong day of week");
-                }
-
-                NewLesson = new Lesson(subject, teacher, StartTime.Text, EndTime.Text, dayOfWeek);
-                MessageBox.Show("added successfuly");
-
-            }
             else
             {
+                Subject subject = Subject.AllSubjects.First(x => x.Name == ChoseSubject.Text);
+                Teacher teacher = Teacher.AllTeachers.First(x => x.Name == ChoseTeacher.Text);
 
+                if (CheckBox.IsChecked == false)
+                {
+                    DayOfWeek dayOfWeek;
+                    switch (ChoseDayOfWeek.Text)
+                    {
+                        case "Monday": dayOfWeek = DayOfWeek.Monday; break;
+                        case "Tuesday": dayOfWeek = DayOfWeek.Tuesday; break;
+                        case "Wednesday": dayOfWeek = DayOfWeek.Wednesday; break;
+                        case "Thursday": dayOfWeek = DayOfWeek.Thursday; break;
+                        case "Friday": dayOfWeek = DayOfWeek.Friday; break;
+                        case "Saturday": dayOfWeek = DayOfWeek.Saturday; break;
+                        case "Sunday": dayOfWeek = DayOfWeek.Sunday; break;
+                        default: throw new Exception("The wrong day of week");
+                    }
+
+                    NewLesson = new Lesson(subject, teacher, StartTime.Text, EndTime.Text, dayOfWeek);
+                    MessageBox.Show("added successfuly");
+                    Close();
+                }
+                else
+                {
+                    //тут повинна бути логіка для разового уроку
+                }
             }
-            Close();
+            
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void AddNewTeacherButton_Click(object sender, RoutedEventArgs e)
         {
             AddTeacherWindow window = new AddTeacherWindow();
             window.ShowDialog();
+            ChoseSubject.ItemsSource = Subject.AllNames;
+            ChoseTeacher.ItemsSource = Teacher.AllNames;
+        }
+
+        private void AddNewSubjectButton_Click(object sender, RoutedEventArgs e)
+        {
+            CreateSubjectWindow window = new CreateSubjectWindow();
+            window.ShowDialog();
+            ChoseSubject.ItemsSource = Subject.AllNames;
+            ChoseTeacher.ItemsSource = Teacher.AllNames;
         }
     }
 }
