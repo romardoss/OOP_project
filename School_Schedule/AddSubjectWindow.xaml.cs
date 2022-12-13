@@ -46,8 +46,7 @@ namespace School_Schedule
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            ChoseSubject.ItemsSource = Subject.AllNames;
-            ChoseTeacher.ItemsSource = Teacher.AllNames;
+            UpdateLists();
             ChoseDayOfWeek.ItemsSource = new List<string>{"Monday", 
                 "Tuesday", "Wednesday", "Thursday", "Friday", 
                 "Saturday", "Sunday"};
@@ -104,16 +103,20 @@ namespace School_Schedule
         {
             AddTeacherWindow window = new AddTeacherWindow();
             window.ShowDialog();
-            ChoseSubject.ItemsSource = Subject.AllNames;
-            ChoseTeacher.ItemsSource = Teacher.AllNames;
+            UpdateLists();
         }
 
         private void AddNewSubjectButton_Click(object sender, RoutedEventArgs e)
         {
             CreateSubjectWindow window = new CreateSubjectWindow();
             window.ShowDialog();
-            ChoseSubject.ItemsSource = Subject.AllNames;
-            ChoseTeacher.ItemsSource = Teacher.AllNames;
+            UpdateLists();
+        }
+
+        private void UpdateLists()
+        {
+            ChoseSubject.ItemsSource = Subject.AllSubjects.Select(x => x.Name);
+            ChoseTeacher.ItemsSource = Teacher.AllTeachers.Select(x => x.Name);
         }
     }
 }

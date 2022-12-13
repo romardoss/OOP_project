@@ -9,7 +9,6 @@ namespace School_Schedule.Logic.TeacherFolder
     public abstract class Teacher
     {
         public static List<Teacher> AllTeachers = new List<Teacher>();
-        public static List<string> AllNames = new List<string>();
         public string Name { get; set; }
         //Тут треба без сетов, бо призначення лише через конструктор, або метод ChangeInfo()
         public string Surname { get; set; }
@@ -24,7 +23,6 @@ namespace School_Schedule.Logic.TeacherFolder
             Surname = surname;
             Patronymic = patronymic;
             PhoneNumber = phone;
-            AllNames.Add(name);
             AllTeachers.Add(this);
             AdditionalInfo = additionalInfo;
         }

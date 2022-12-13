@@ -50,6 +50,7 @@ namespace School_Schedule
                         SurnameField.Text, PatronymicField.Text, PhoneNumberField.Text,
                         OfficeField.Text, AdditionalInfoField.Text);
                     MessageBox.Show("Added succesfully");
+                    Close();
                 }
                 else
                 {
