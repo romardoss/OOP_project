@@ -43,27 +43,13 @@
         <TextBlock FontSize="28" Margin="0,0,0,250"><Run Text="Create new subject"/></TextBlock>
         <TextBlock Margin="0,0,200,120"><Run Text="Name:"/></TextBlock>
         <TextBox x:Name="NameField"  Margin="150,0,0,121.6"/>
-        <TextBlock Margin="0,0,200,50"><Run Text="Type:"/></TextBlock>
-        <TextBox x:Name="TypeField" Margin="150,0,0,50"/>
+        <TextBlock Margin="0,0,200,40"><Run Text="Type:"/></TextBlock>
+        <TextBox x:Name="TypeField" Margin="150,0,0,40"/>
         <TextBlock Margin="0,40,220,0"><Run Text="Homework:"/></TextBlock>
-        <TextBlock Margin="0,180,220,0"><Run Text="Links:"/></TextBlock>
-        <Button x:Name="CancelButton" Content="Cancel" Width="100" Height="25" Margin="0,330,172,0" Click="CancelButton_Click" />
-        <Button x:Name="AcceptButton" Content="Accept" Width="100" Height="25" Margin="220,330,0,0" Click="AcceptButton_Click" />
-        <RichTextBox Margin="120,60,0,0" >
-            <FlowDocument >
-                <Paragraph>
-                    <Run x:Name="HomeworkField" Text="Exercise1
-                         Exercise2"/>
-                </Paragraph>
-            </FlowDocument>
-        </RichTextBox>
-        <RichTextBox Margin="120,200,0,0" >
-            <FlowDocument>
-                <Paragraph>
-                    <Run x:Name="LinksField" Text="Link1
-                         Link2"/>
-                </Paragraph>
-            </FlowDocument>
-        </RichTextBox>
+        <TextBlock Margin="0,120,220,0"><Run Text="Useful link:"/></TextBlock>
+        <Button x:Name="CancelButton" Content="Cancel" Width="100" Height="25" Margin="0,250,172,0" Click="CancelButton_Click" />
+        <Button x:Name="AcceptButton" Content="Accept" Width="100" Height="25" Margin="220,250,0,0" Click="AcceptButton_Click" />
+        <TextBox x:Name="HomeworkField" Margin="150,40,0,0" />
+        <TextBox x:Name="LinkField" Margin="150,120,0,0" />
     </Grid>
 </Window>

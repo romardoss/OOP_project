@@ -37,7 +37,7 @@ namespace School_Schedule
             if(NameField.Text != "")
             {
                 new Subject(NameField.Text, TypeField.Text,
-                    HomeworkField.Text, LinksField.Text);
+                    HomeworkField.Text, LinkField.Text);
                 MessageBox.Show("Created Successfully");
                 Close();
             }

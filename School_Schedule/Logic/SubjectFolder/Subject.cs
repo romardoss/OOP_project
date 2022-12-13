@@ -16,14 +16,14 @@ namespace School_Schedule.Logic.SubjectFolder
         public string Name { get; set; }
         public string Type { get; set; }
         public string Homework { get; set; }
-        public string Links { get; set; }
+        public string Link { get; set; }
 
-        public Subject(string name, string type, string homework, string links)
+        public Subject(string name, string type, string homework, string link)
         {
             Name = name;
             Homework = homework;
             Type = type;
-            Links = links;
+            Link = link;
             AllSubjects.Add(this);
             AllNames.Add(Name);
         }

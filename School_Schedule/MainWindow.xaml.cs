@@ -54,8 +54,8 @@ namespace School_Schedule
             new Subject("Physic", "nothing", "", "");
             new Subject("History", "nothing", "", "");
             new Subject("Language", "nothing", "", "");
-            new SchoolTeacher("Oleg", "Slyva", "Oleksandrovich", "000", "12");
-            new SchoolTeacher("Andrew", "Slyva", "Oleksandrovich", "000", "12");
+            new SchoolTeacher("Oleg", "Slyva", "Oleksandrovich", "000", "12", "");
+            new SchoolTeacher("Andrew", "Slyva", "Oleksandrovich", "000", "12", "");
             //DayOfWeek dayOfWeek = DayOfWeek.Monday;
             //DateTime start = new DateTime(DateTime.Today.Year, 
             //    DateTime.Today.Month, DateTime.Today.Day, 16, 30, 0);

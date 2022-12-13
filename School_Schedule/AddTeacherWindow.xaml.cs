@@ -48,18 +48,16 @@ namespace School_Schedule
                 {
                     new SchoolTeacher(NameField.Text, 
                         SurnameField.Text, PatronymicField.Text, PhoneNumberField.Text,
-                        OfficeField.Text );
+                        OfficeField.Text, AdditionalInfoField.Text);
                     MessageBox.Show("Added succesfully");
                 }
                 else
                 {
                     new PrivateTeacher(NameField.Text,
                         SurnameField.Text, PatronymicField.Text, PhoneNumberField.Text,
-                        AddressField.Text, int.Parse(PriceField.Text));
+                        AddressField.Text, int.Parse(PriceField.Text), AdditionalInfoField.Text);
                     MessageBox.Show("Added succesfully");
                 }
-                //Teacher newTeacher = new Teacher(NameField.Text, 
-                //  SurnameField.Text, PatronymicField.Text, PhoneNumberField.Text);
 
                 Close();
             }

@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:School_Schedule"
         mc:Ignorable="d"
-        Title="Lesson Information" Height="450" Width="500" Loaded="Window_Loaded">
+        Title="Lesson Information" WindowStyle="None" Height="450" Width="500" Loaded="Window_Loaded"
+        Background="#7e685a">
     <Window.Resources>
         <Style TargetType="{x:Type TextBlock}">
             <Setter Property="Foreground" Value="White"/>
@@ -35,8 +36,8 @@
         <TextBlock x:Name="SubjectInfo" FontSize="28" Margin="0,0,0,300"><Run Text="Subject"/></TextBlock>
         <TextBlock x:Name="TeacherInfo" Margin="0,0,0,200"><Run Text="Teacher"/></TextBlock>
         <TextBlock x:Name="TimeInfo" Margin="0,0,0,120"><Run Text="Time"/></TextBlock>
+        <Expander x:Name="FullTeacherInfo" Header="More about teacher" Height="180" Margin="0,100,200,0"/>
+        <Expander x:Name="LessonInfo" Header="More about lesson" Height="180" Margin="200,100,0,0"/>
         <Button x:Name="OkayButton" Content="Okay" Width="100" Height="25" Margin="0,330,0,0" Click="OkayButton_Click"/>
-        <Expander x:Name="FullTeacherInfo" Header="More about teacher" Height="150" Margin="28,175,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Expander x:Name="HomeworkInfo" Header="Homework" Height="150" Margin="250,175,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
     </Grid>
 </Window>

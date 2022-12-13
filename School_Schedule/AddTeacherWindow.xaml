@@ -55,8 +55,8 @@
         <TextBox x:Name="OfficeField" Margin="0,140,200,0" Text="Office number"/>
         <TextBox x:Name="PriceField" Margin="150,140,0,0" Text="Price of the lesson"/>
         <TextBox x:Name="AddressField" Margin="150,200,0,0" Text="Address"/>
-        <TextBlock x:Name="AdditionalInfoField" Margin="0,260,220,0"><Run Text="Additional info:"/></TextBlock>
-        <TextBox Margin="150,262,0,0"/>
+        <TextBlock Margin="0,260,220,0"><Run Text="Additional info:"/></TextBlock>
+        <TextBox x:Name="AdditionalInfoField" Margin="150,262,0,0"/>
         <Button x:Name="CancelButton" Content="Cancel" Width="100" Height="25" Margin="0,330,172,0" Click="CancelButton_Click" />
         <Button x:Name="AcceptButton" Content="Accept" Width="100" Height="25" Margin="220,330,0,0" Click="AcceptButton_Click" />
     </Grid>

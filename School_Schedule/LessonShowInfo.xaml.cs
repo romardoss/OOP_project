@@ -32,12 +32,37 @@ namespace School_Schedule
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            GenerateLessonInfo();
+        }
+
+        private void GenerateLessonInfo()
+        {
             SubjectInfo.Text = $"{Lesson.Subject.Name}";
             TeacherInfo.Text = $"{Lesson.Teacher.Name} {Lesson.Teacher.Surname} {Lesson.Teacher.Patronymic}";
             TimeInfo.Text = $"{Lesson.DayOfWeek} {Lesson.Start.Hour}:{Lesson.Start.Minute}-" +
                     $"{Lesson.End.Hour}:{Lesson.End.Minute}";
-            FullTeacherInfo.Content = $"Phone: {Lesson.Teacher.PhoneNumber}\nfsdfs\nskf";
-            HomeworkInfo.Content = $"{Lesson.Subject.Homework}";
+            //про вчителя інформація повинна показуватися відповідно до того, приватний він чи шкільний
+            FullTeacherInfo.Content = $"Phone: {Lesson.Teacher.PhoneNumber}\n{GetFullTeacherInfo()}\n" +
+                $"{Lesson.Teacher.AdditionalInfo}";
+            LessonInfo.Content = $"Type: {Lesson.Subject.Type} \nLink: {Lesson.Subject.Link}\n" +
+                $"Homework: {Lesson.Subject.Homework}";
+        }
+
+        private string GetFullTeacherInfo()
+        {
+            Teacher teacher = Lesson.Teacher;
+            string answer = "";
+            try
+            {
+                SchoolTeacher sTeacher = (SchoolTeacher) teacher;
+                answer = $"Office: {sTeacher.OfficeNumber}";
+            } catch { }
+            try
+            {
+                PrivateTeacher pTeacher = (PrivateTeacher) teacher;
+                answer = $"Price of lesson: {pTeacher.PriceOfLesson} \nAddress: {pTeacher.Address}";
+            } catch { }
+            return answer;
         }
 
         private void OkayButton_Click(object sender, RoutedEventArgs e)
