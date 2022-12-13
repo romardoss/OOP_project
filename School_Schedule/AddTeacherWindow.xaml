@@ -46,8 +46,8 @@
         <TextBox x:Name="NameField"  Margin="150,0,0,200"/>
         <TextBlock Margin="0,0,200,120"><Run Text="Surname:"/></TextBlock>
         <TextBox x:Name="SurnameField" Margin="150,0,0,120"/>
-        <TextBlock x:Name="PatronymicField" Margin="0,0,220,50"><Run Text="Patronymic:"/></TextBlock>
-        <TextBox Margin="150,0,0,50"/>
+        <TextBlock Margin="0,0,220,50"><Run Text="Patronymic:"/></TextBlock>
+        <TextBox x:Name="PatronymicField" Margin="150,0,0,50"/>
         <TextBlock Margin="0,20,220,0"><Run Text="Phone Number:"/></TextBlock>
         <TextBox x:Name="PhoneNumberField" Margin="150,20,0,0"/>
         <RadioButton x:Name="SchoolTeacherButton" Content="School teacher" Margin="0,90,220,0" Checked="SchoolTeacherButton_Checked"/>
