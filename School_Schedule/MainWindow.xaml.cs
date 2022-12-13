@@ -33,8 +33,6 @@ namespace School_Schedule
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //Content = "wow";
-            //MessageBox.Show("You`re so well");
             AddSubjectWindow window = new AddSubjectWindow();
             window.ShowDialog();
             if(window.NewLesson != null)

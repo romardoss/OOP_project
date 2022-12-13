@@ -15,5 +15,6 @@ namespace School_Schedule.DataBase
         List<Subject> Get();
         List<string> GetNames();
         void Add(Subject subject);
+        Subject GetByName(string name);
     }
 }

@@ -22,6 +22,11 @@ namespace School_Schedule.DataBase.Services
             return DataBase.Teachers;
         }
 
+        public Teacher GetByName(string name)
+        {
+            return DataBase.Teachers.First(x => x.Name == name);
+        }
+
         public List<string> GetNames()
         {
             return DataBase.Teachers.Select(x => x.Name).ToList();

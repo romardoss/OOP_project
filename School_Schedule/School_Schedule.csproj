@@ -88,6 +88,13 @@
     <Compile Include="CreateSubjectWindow.xaml.cs">
       <DependentUpon>CreateSubjectWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DataBase\DataBase.cs" />
+    <Compile Include="DataBase\IServices\ILessonService.cs" />
+    <Compile Include="DataBase\IServices\ISubjectService.cs" />
+    <Compile Include="DataBase\IServices\ITeacherService.cs" />
+    <Compile Include="DataBase\Services\LessonService.cs" />
+    <Compile Include="DataBase\Services\SubjectService.cs" />
+    <Compile Include="DataBase\Services\TeacherService.cs" />
     <Compile Include="LessonShowInfo.xaml.cs">
       <DependentUpon>LessonShowInfo.xaml</DependentUpon>
     </Compile>
@@ -128,8 +135,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DataBase\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

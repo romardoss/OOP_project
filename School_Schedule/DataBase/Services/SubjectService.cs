@@ -21,6 +21,11 @@ namespace School_Schedule.DataBase.Services
             return DataBase.Subjects;
         }
 
+        public Subject GetByName(string name)
+        {
+            return DataBase.Subjects.First(x => x.Name == name);
+        }
+
         public List<string> GetNames()
         {
             return DataBase.Subjects.Select(x => x.Name).ToList();

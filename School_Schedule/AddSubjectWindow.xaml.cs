@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using School_Schedule.Logic.SubjectFolder;
 using School_Schedule.Logic.TeacherFolder;
 using School_Schedule.Logic.LessonFolder;
+using School_Schedule.DataBase.Services;
 
 namespace School_Schedule
 {
@@ -23,8 +24,10 @@ namespace School_Schedule
 
     public partial class AddSubjectWindow : Window
     {
-
-        public Lesson NewLesson { get; set; }
+        public Lesson NewLesson;
+        private readonly SubjectService SubjectService = new SubjectService();
+        private readonly LessonService LessonService = new LessonService();
+        private readonly TeacherService TeacherService = new TeacherService();
 
         public AddSubjectWindow()
         {
@@ -69,8 +72,10 @@ namespace School_Schedule
             }
             else
             {
-                Subject subject = Subject.AllSubjects.First(x => x.Name == ChoseSubject.Text);
-                Teacher teacher = Teacher.AllTeachers.First(x => x.Name == ChoseTeacher.Text);
+                //Subject subject = Subject.AllSubjects.First(x => x.Name == ChoseSubject.Text);
+                //Teacher teacher = Teacher.AllTeachers.First(x => x.Name == ChoseTeacher.Text);
+                Subject subject = SubjectService.GetByName(ChoseSubject.Text);
+                Teacher teacher = TeacherService.GetByName(ChoseTeacher.Text);
 
                 if (CheckBox.IsChecked == false)
                 {
@@ -115,8 +120,10 @@ namespace School_Schedule
 
         private void UpdateLists()
         {
-            ChoseSubject.ItemsSource = Subject.AllSubjects.Select(x => x.Name);
-            ChoseTeacher.ItemsSource = Teacher.AllTeachers.Select(x => x.Name);
+            //ChoseSubject.ItemsSource = Subject.AllSubjects.Select(x => x.Name);
+            //ChoseTeacher.ItemsSource = Teacher.AllTeachers.Select(x => x.Name);
+            ChoseSubject.ItemsSource = SubjectService.GetNames();
+            ChoseTeacher.ItemsSource = TeacherService.GetNames();
         }
     }
 }

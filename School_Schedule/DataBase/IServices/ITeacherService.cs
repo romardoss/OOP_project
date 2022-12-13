@@ -16,6 +16,7 @@ namespace School_Schedule.DataBase
         List<string> GetNames();
         List<string> GetSurnames();
         List<string> GetPatronymics();
+        Teacher GetByName(string name);
         void Add(Teacher teacher);
         //List<string> GetPhoneNumber();
         //List<string> GetEmails();
