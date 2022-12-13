@@ -53,13 +53,19 @@ namespace School_Schedule
                 }
                 else
                 {
-                    new PrivateTeacher(NameField.Text,
+                    try
+                    {
+                        new PrivateTeacher(NameField.Text,
                         SurnameField.Text, PatronymicField.Text, PhoneNumberField.Text,
                         AddressField.Text, int.Parse(PriceField.Text), AdditionalInfoField.Text);
-                    MessageBox.Show("Added succesfully");
+                        MessageBox.Show("Added succesfully");
+                        Close();
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Price must be a number");
+                    }
                 }
-
-                Close();
             }
             else
             {
