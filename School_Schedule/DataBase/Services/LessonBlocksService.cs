@@ -84,5 +84,15 @@ namespace School_Schedule.DataBase.Services
             //з бази даних і цикл foreach (BaseLesson lesson in lessonService.Get()) крашиться
         }
 
+        public List<TextBlock> GetLessonsThatIsNotCurrentNow()
+        {
+            var temp = Get().Values.Where(x => !x.IsNow()).ToList();
+            List<TextBlock> result = new List<TextBlock>();
+            foreach (var item in temp)
+            {
+                result.Add(GetKeyByValue(item));
+            }
+            return result;
+        }
     }
 }

@@ -48,7 +48,7 @@ namespace School_Schedule
             try
             {
                 OneTimeLesson oneLesson = (OneTimeLesson)Lesson;
-                return $"{oneLesson.Date.Day}.{oneLesson.Date.Month}.{oneLesson.Date.Year} ";
+                return $"{oneLesson.Start.Day}.{oneLesson.Start.Month}.{oneLesson.Start.Year} ";
             } catch {}
             return "";
         }

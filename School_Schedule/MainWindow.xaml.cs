@@ -48,11 +48,6 @@ namespace School_Schedule
             new Subject("Language", "nothing", "", "");
             new SchoolTeacher("Oleg", "Slyva", "Oleksandrovich", "000", "12", "");
             new SchoolTeacher("Andrew", "Slyva", "Oleksandrovich", "000", "12", "");
-            //DayOfWeek dayOfWeek = DayOfWeek.Monday;
-            //DateTime start = new DateTime(DateTime.Today.Year, 
-            //    DateTime.Today.Month, DateTime.Today.Day, 16, 30, 0);
-            //DateTime end = new DateTime(DateTime.Today.Year,
-            //    DateTime.Today.Month, DateTime.Today.Day, 19, 30, 0);
 
             CreateTimeLine();
             CreateCurrentTimeLine();
@@ -154,9 +149,16 @@ namespace School_Schedule
                 TextBlock currentLesson = LessonBlocksService.FindCurrent();
                 currentLesson.Background = new SolidColorBrush(Color.FromRgb(173, 210, 117));
             }
-            catch (Exception)
-            {
+            catch (Exception) { }
+        }
 
+        private void SetNotCurrentLessons()
+        {
+            LessonBlocksService lessonBlocksService = new LessonBlocksService();
+            List<TextBlock> notCurrentLessons = lessonBlocksService.GetLessonsThatIsNotCurrentNow();
+            foreach(var block in notCurrentLessons)
+            {
+                block.Background = new SolidColorBrush(Color.FromRgb(231, 113, 125));
             }
         }
 
@@ -179,6 +181,7 @@ namespace School_Schedule
             LessonBlocksService lessonBlocksService = new LessonBlocksService();
             lessonBlocksService.DeleteOneTimeLessonsThatAreGone();
             RemoveDeletedLessons();
+            SetNotCurrentLessons();
         }
 
         private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

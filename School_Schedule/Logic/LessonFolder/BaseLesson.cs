@@ -35,7 +35,12 @@ namespace School_Schedule.Logic.LessonFolder
 
         public virtual bool IsNow()
         {
-            return (DateTime.Now > Start) && (DateTime.Now < End);
+            //кожен час переводиться у кількість хвилин
+            int startMinutes = Start.Hour * 60 + Start.Minute;
+            int endMinutes = End.Hour * 60 + End.Minute;
+            DateTime now = DateTime.Now;
+            int nowMinutes = now.Hour * 60 + now.Minute;
+            return (nowMinutes > startMinutes) && (nowMinutes < endMinutes);
         }
 
         public abstract void ShowInfo();

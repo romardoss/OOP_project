@@ -6,24 +6,13 @@ namespace School_Schedule.Logic.LessonFolder
 {
     public class OneTimeLesson : BaseLesson
     {
-        public DateTime Date { get; set; }
 
         public OneTimeLesson(Subject subject, Teacher teacher, string timeStart, 
             string timeEnd, DateTime date)
             : base(subject, teacher, timeStart, timeEnd)
         {
-            //string[] dateComponents = date.Split('.');
-            //int day = int.Parse(dateComponents[0]);
-            //int month = int.Parse(dateComponents[1]);
-            //int year = int.Parse(dateComponents[2]);
-            //Date = new DateTime(year, month, day, 0, 0, 0);
-            Date = date;
-        }
-
-        public override bool IsNow()
-        {
-            return (DateTime.Now > Start) && (DateTime.Now < End)
-                && (DateTime.Today == Date);
+            Start = new DateTime(date.Year, date.Month, date.Day, Start.Hour, Start.Minute, 0);
+            End = new DateTime(date.Year, date.Month, date.Day, End.Hour, End.Minute, 0);
         }
 
         public bool IsTimeToDelete()
@@ -39,7 +28,12 @@ namespace School_Schedule.Logic.LessonFolder
 
         public override DayOfWeek GetDayOfWeek()
         {
-            return Date.DayOfWeek;
+            return Start.DayOfWeek;
+        }
+
+        public override bool IsNow()
+        {
+            return (DateTime.Now > Start) && (DateTime.Now < End);
         }
     }
 }
