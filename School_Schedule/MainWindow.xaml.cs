@@ -1,16 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 using School_Schedule.Logic.SubjectFolder;
 using School_Schedule.Logic.TeacherFolder;
@@ -24,8 +17,6 @@ namespace School_Schedule
     /// </summary>
     public partial class MainWindow : Window
     {
-
-        //private readonly Dictionary<TextBlock, Lesson> LessonButtons = new Dictionary<TextBlock, Lesson>();
         private readonly LessonBlocksService LessonBlocksService = new LessonBlocksService();
         private List<Canvas> Canvases;
 
@@ -62,7 +53,6 @@ namespace School_Schedule
             //    DateTime.Today.Month, DateTime.Today.Day, 16, 30, 0);
             //DateTime end = new DateTime(DateTime.Today.Year,
             //    DateTime.Today.Month, DateTime.Today.Day, 19, 30, 0);
-
 
             CreateTimeLine();
             CreateCurrentTimeLine();
@@ -115,7 +105,6 @@ namespace School_Schedule
                 case DayOfWeek.Saturday: Saturday.Children.Add(lessonButton); break;
                 case DayOfWeek.Sunday: Sunday.Children.Add(lessonButton); break;
             }
-            //LessonButtons.Add(lessonButton, lesson);
             LessonBlocksService.Add(lessonButton, lesson);
         }
 
@@ -162,7 +151,6 @@ namespace School_Schedule
         {
             try
             {
-                //TextBlock currentLesson = LessonButtons.First(x => x.Value.IsNow()).Key;
                 TextBlock currentLesson = LessonBlocksService.FindCurrent();
                 currentLesson.Background = new SolidColorBrush(Color.FromRgb(173, 210, 117));
             }

@@ -1,16 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using School_Schedule.Logic.SubjectFolder;
 using School_Schedule.Logic.TeacherFolder;
 using School_Schedule.Logic.LessonFolder;
@@ -71,8 +62,6 @@ namespace School_Schedule
             }
             else
             {
-                //Subject subject = Subject.AllSubjects.First(x => x.Name == ChoseSubject.Text);
-                //Teacher teacher = Teacher.AllTeachers.First(x => x.Name == ChoseTeacher.Text);
                 Subject subject = SubjectService.GetByName(ChoseSubject.Text);
                 Teacher teacher = TeacherService.GetByName(ChoseTeacher.Text);
 
@@ -119,8 +108,6 @@ namespace School_Schedule
 
         private void UpdateLists()
         {
-            //ChoseSubject.ItemsSource = Subject.AllSubjects.Select(x => x.Name);
-            //ChoseTeacher.ItemsSource = Teacher.AllTeachers.Select(x => x.Name);
             ChoseSubject.ItemsSource = SubjectService.GetNames();
             ChoseTeacher.ItemsSource = TeacherService.GetNames();
         }

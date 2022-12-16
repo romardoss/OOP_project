@@ -1,10 +1,7 @@
 ﻿using School_Schedule.DataBase.IServices;
 using School_Schedule.Logic.LessonFolder;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 
 namespace School_Schedule.DataBase.Services

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using School_Schedule.DataBase.Services;
+﻿using School_Schedule.DataBase.Services;
 
 
 namespace School_Schedule.Logic.TeacherFolder
@@ -11,8 +6,6 @@ namespace School_Schedule.Logic.TeacherFolder
     public abstract class Teacher
     {
         private readonly TeacherService TeacherService = new TeacherService();
-        //public static List<Teacher> AllTeachers = new List<Teacher>();
-        //треба прибрати те, що зверху, бо є база даних та сервіси
         public string Name { get; set; }
         //Тут треба без сетов, бо призначення лише через конструктор, або метод ChangeInfo()
         public string Surname { get; set; }
@@ -27,7 +20,6 @@ namespace School_Schedule.Logic.TeacherFolder
             Surname = surname;
             Patronymic = patronymic;
             PhoneNumber = phone;
-            //AllTeachers.Add(this);
             TeacherService.Add(this);
             AdditionalInfo = additionalInfo;
         }

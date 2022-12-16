@@ -3,8 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:School_Schedule"
-        xmlns:Collections="clr-namespace:System.Collections;assembly=mscorlib" x:Class="School_Schedule.AddSubjectWindow"
+        x:Class="School_Schedule.AddSubjectWindow"
         mc:Ignorable="d"
         Title="New Lesson" Height="450" Width="800" Loaded="Window_Loaded">
 
