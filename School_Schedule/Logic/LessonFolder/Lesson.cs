@@ -5,17 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 using School_Schedule.Logic.SubjectFolder;
 using School_Schedule.Logic.TeacherFolder;
+using School_Schedule.DataBase.Services;
 
 namespace School_Schedule.Logic.LessonFolder
 {
     public class Lesson
     {
+        private LessonService LessonService = new LessonService();
         public Subject Subject { get; set; }
         public Teacher Teacher { get; set; }
         public DayOfWeek DayOfWeek { get; set; }
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
-        public static readonly List<Lesson> AllLessons = new List<Lesson>();
+        //public static readonly List<Lesson> AllLessons = new List<Lesson>();
 
         public Lesson(Subject subject, Teacher teacher, string timeStart, string timeEnd, DayOfWeek day)
         {
@@ -35,7 +37,8 @@ namespace School_Schedule.Logic.LessonFolder
             End = new DateTime(DateTime.Today.Year,
                 DateTime.Today.Month, DateTime.Today.Day, hours, minutes, 0);
 
-            AllLessons.Add(this);
+            LessonService.Add(this);
+            //AllLessons.Add(this);
         }
 
         public virtual bool IsNow()

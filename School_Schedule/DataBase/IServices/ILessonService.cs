@@ -14,5 +14,6 @@ namespace School_Schedule.DataBase
     {
         List<Lesson> Get();
         void Add(Lesson lesson);
+        void Delete (Lesson lesson);
     }
 }

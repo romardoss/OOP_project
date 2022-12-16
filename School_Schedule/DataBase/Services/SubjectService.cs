@@ -9,8 +9,6 @@ namespace School_Schedule.DataBase.Services
 {
     public class SubjectService : ISubjectService
     {
-        public DataBase DataBase { get; set; }
-
         public void Add(Subject subject)
         {
             DataBase.Subjects.Add(subject);

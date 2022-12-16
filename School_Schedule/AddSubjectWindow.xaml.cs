@@ -26,7 +26,6 @@ namespace School_Schedule
     {
         public Lesson NewLesson;
         private readonly SubjectService SubjectService = new SubjectService();
-        private readonly LessonService LessonService = new LessonService();
         private readonly TeacherService TeacherService = new TeacherService();
 
         public AddSubjectWindow()

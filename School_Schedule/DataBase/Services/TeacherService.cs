@@ -10,8 +10,6 @@ namespace School_Schedule.DataBase.Services
 {
     public class TeacherService : ITeacherService
     {
-        public DataBase DataBase { get; set; }
-
         public void Add(Teacher teacher)
         {
             DataBase.Teachers.Add(teacher);

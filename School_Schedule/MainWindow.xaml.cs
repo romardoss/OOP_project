@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using School_Schedule.Logic.SubjectFolder;
 using School_Schedule.Logic.TeacherFolder;
 using School_Schedule.Logic.LessonFolder;
+using School_Schedule.DataBase.Services;
 
 namespace School_Schedule
 {
@@ -24,7 +25,9 @@ namespace School_Schedule
     public partial class MainWindow : Window
     {
 
-        private readonly Dictionary<TextBlock, Lesson> LessonButtons = new Dictionary<TextBlock, Lesson>();
+        //private readonly Dictionary<TextBlock, Lesson> LessonButtons = new Dictionary<TextBlock, Lesson>();
+        private readonly LessonBlocksService LessonBlocksService = new LessonBlocksService();
+        private List<Canvas> Canvases;
 
         public MainWindow()
         {
@@ -64,6 +67,8 @@ namespace School_Schedule
             CreateTimeLine();
             CreateCurrentTimeLine();
             RefreshButton_Click();
+            Canvases = new List<Canvas> { Monday, Tuesday, Wednesday, Thursday, Friday,
+            Saturday, Sunday };
         }
 
         private void CreateLesson(Lesson lesson)
@@ -110,7 +115,8 @@ namespace School_Schedule
                 case DayOfWeek.Saturday: Saturday.Children.Add(lessonButton); break;
                 case DayOfWeek.Sunday: Sunday.Children.Add(lessonButton); break;
             }
-            LessonButtons.Add(lessonButton, lesson);
+            //LessonButtons.Add(lessonButton, lesson);
+            LessonBlocksService.Add(lessonButton, lesson);
         }
 
         private void CreateTimeLine()
@@ -156,7 +162,8 @@ namespace School_Schedule
         {
             try
             {
-                TextBlock currentLesson = LessonButtons.First(x => x.Value.IsNow()).Key;
+                //TextBlock currentLesson = LessonButtons.First(x => x.Value.IsNow()).Key;
+                TextBlock currentLesson = LessonBlocksService.FindCurrent();
                 currentLesson.Background = new SolidColorBrush(Color.FromRgb(173, 210, 117));
             }
             catch (Exception)
@@ -165,10 +172,23 @@ namespace School_Schedule
             }
         }
 
+        private void RemoveDeletedLessons()
+        {
+            DeleteQueueService deleteQueueService = new DeleteQueueService();
+            List<TextBlock> toDelete = deleteQueueService.GetList();
+            foreach(TextBlock item in toDelete)
+            {
+                Monday.Children.Remove(item);
+                Canvases.ForEach(x => x.Children.Remove(item));
+            }
+            deleteQueueService.Clean();
+        }
+
         private void RefreshButton_Click(object sender=null, RoutedEventArgs e=null)
         {
             SetCurrentLesson();
             //і ще має бути функція зміни кольору з червоного на зелений, якщо урок уже триває
+            RemoveDeletedLessons();
         }
 
         private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -176,13 +196,12 @@ namespace School_Schedule
             object originalSource = e.OriginalSource;
             if (originalSource is TextBlock block)
             {
-                if (LessonButtons.ContainsKey(block))
+                //if (LessonButtons.ContainsKey(block))
+                Lesson lesson = LessonBlocksService.GetValue(block);
+                if(LessonBlocksService.ContainsKey(block) && lesson != null)
                 {
-                    if (!LessonButtons.TryGetValue(block, out Lesson lesson))
-                    {
-                        return;
-                    }
                     lesson.ShowInfo();
+                    RefreshButton_Click();
                 }
             }
         }

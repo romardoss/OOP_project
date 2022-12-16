@@ -38,6 +38,7 @@
         <TextBlock x:Name="TimeInfo" Margin="0,0,0,120"><Run Text="Time"/></TextBlock>
         <Expander x:Name="FullTeacherInfo" Header="More about teacher" Height="180" Margin="0,100,200,0"/>
         <Expander x:Name="LessonInfo" Header="More about lesson" Height="180" Margin="200,100,0,0"/>
-        <Button x:Name="OkayButton" Content="Okay" Width="100" Height="25" Margin="0,330,0,0" Click="OkayButton_Click"/>
+        <Button x:Name="OkayButton" Content="Okay" Width="100" Height="25" Margin="200,330,0,0" Click="OkayButton_Click"/>
+        <Button x:Name="DeleteLessonButton" Content="Delete this lesson" Width="150" Height="25" Margin="0,330,200,0" Background="#e7717d" Click="DeleteLessonButton_Click"/>
     </Grid>
 </Window>

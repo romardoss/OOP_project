@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using School_Schedule.Logic.SubjectFolder;
 using School_Schedule.Logic.TeacherFolder;
 using School_Schedule.Logic.LessonFolder;
+using School_Schedule.DataBase.Services;
 
 namespace School_Schedule
 {
@@ -69,5 +70,16 @@ namespace School_Schedule
         {
             Close();
         }
+
+        private void DeleteLessonButton_Click(object sender, RoutedEventArgs e)
+        {
+            LessonBlocksService lessonBlocksService = new LessonBlocksService();
+            DeleteQueueService deleteQueueService = new DeleteQueueService();
+            deleteQueueService.Add(lessonBlocksService.GetKeyByValue(Lesson));
+            lessonBlocksService.DeleteByValue(Lesson);
+            MessageBox.Show("Deleted Successfully");
+            Close();
+        }
+
     }
 }
