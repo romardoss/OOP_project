@@ -5,8 +5,8 @@ namespace School_Schedule.DataBase
 {
     public interface ILessonService
     {
-        List<Lesson> Get();
-        void Add(Lesson lesson);
-        void Delete (Lesson lesson);
+        List<BaseLesson> Get();
+        void Add(BaseLesson lesson);
+        void Delete (BaseLesson lesson);
     }
 }

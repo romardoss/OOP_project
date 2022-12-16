@@ -10,8 +10,8 @@ namespace School_Schedule.DataBase
     {
         public static List<Teacher> Teachers = new List<Teacher>();
         public static List<Subject> Subjects = new List<Subject>();
-        public static List<Lesson> Lessons = new List<Lesson>();
-        public static Dictionary<TextBlock, Lesson> LessonBlocks = new Dictionary<TextBlock, Lesson>();
+        public static List<BaseLesson> Lessons = new List<BaseLesson>();
+        public static Dictionary<TextBlock, BaseLesson> LessonBlocks = new Dictionary<TextBlock, BaseLesson>();
         public static List<TextBlock> QueueToDeleteBlocks = new List<TextBlock>();
     }
 }

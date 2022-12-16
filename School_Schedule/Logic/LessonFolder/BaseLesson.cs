@@ -1,23 +1,21 @@
-﻿using System;
+﻿using School_Schedule.DataBase.Services;
 using School_Schedule.Logic.SubjectFolder;
 using School_Schedule.Logic.TeacherFolder;
-using School_Schedule.DataBase.Services;
+using System;
 
 namespace School_Schedule.Logic.LessonFolder
 {
-    public class Lesson
+    public abstract class BaseLesson
     {
-        private readonly LessonService LessonService = new LessonService();
+        protected readonly LessonService LessonService = new LessonService();
         public Subject Subject { get; set; }
         public Teacher Teacher { get; set; }
-        public DayOfWeek DayOfWeek { get; set; }
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
 
-        public Lesson(Subject subject, Teacher teacher, string timeStart, string timeEnd, DayOfWeek day)
+        public BaseLesson(Subject subject, Teacher teacher, string timeStart, string timeEnd)
         {
             Subject = subject;
-            DayOfWeek = day;
             Teacher = teacher;
 
             string[] timeComponents = timeStart.Split(':');
@@ -37,15 +35,10 @@ namespace School_Schedule.Logic.LessonFolder
 
         public virtual bool IsNow()
         {
-            return (DateTime.Now > Start) && (DateTime.Now < End) 
-                && DateTime.Today.DayOfWeek == DayOfWeek;
+            return (DateTime.Now > Start) && (DateTime.Now < End);
         }
 
-        public void ShowInfo()
-        {
-            LessonShowInfo info = new LessonShowInfo(this);
-            info.ShowDialog();
-        }
-
+        public abstract void ShowInfo();
+        public abstract DayOfWeek GetDayOfWeek();
     }
 }

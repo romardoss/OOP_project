@@ -15,7 +15,7 @@ namespace School_Schedule
 
     public partial class AddSubjectWindow : Window
     {
-        public Lesson NewLesson;
+        public BaseLesson NewLesson;
         private readonly SubjectService SubjectService = new SubjectService();
         private readonly TeacherService TeacherService = new TeacherService();
 
@@ -55,8 +55,7 @@ namespace School_Schedule
             
 
             if (StartTime.Text == "" || EndTime.Text == "" || 
-                ChoseSubject.Text == "" || ChoseTeacher.Text == ""
-                || ChoseDayOfWeek.Text == "")
+                ChoseSubject.Text == "" || ChoseTeacher.Text == "")
             {
                 MessageBox.Show("Some fields are empty");
             }
@@ -65,7 +64,7 @@ namespace School_Schedule
                 Subject subject = SubjectService.GetByName(ChoseSubject.Text);
                 Teacher teacher = TeacherService.GetByName(ChoseTeacher.Text);
 
-                if (CheckBox.IsChecked == false)
+                if (CheckBox.IsChecked == false && ChoseDayOfWeek.Text != "")
                 {
                     DayOfWeek dayOfWeek;
                     switch (ChoseDayOfWeek.Text)
@@ -80,13 +79,21 @@ namespace School_Schedule
                         default: throw new Exception("The wrong day of week");
                     }
 
-                    NewLesson = new Lesson(subject, teacher, StartTime.Text, EndTime.Text, dayOfWeek);
+                    NewLesson = new RegularLesson(subject, teacher, StartTime.Text, EndTime.Text, 
+                        dayOfWeek);
                     MessageBox.Show("added successfuly");
+                    Close();
+                }
+                else if (CheckBox.IsChecked == true && DateOfLesson.SelectedDate != null)
+                {
+                    NewLesson = new OneTimeLesson(subject, teacher, StartTime.Text, 
+                        EndTime.Text, DateOfLesson.SelectedDate.Value);
+                    MessageBox.Show("In developing...");
                     Close();
                 }
                 else
                 {
-                    //тут повинна бути логіка для разового уроку
+                    MessageBox.Show("Some fields are empty");
                 }
             }
             

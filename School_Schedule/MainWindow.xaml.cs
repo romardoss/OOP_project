@@ -31,7 +31,7 @@ namespace School_Schedule
             window.ShowDialog();
             if(window.NewLesson != null)
             {
-                Lesson newLesson = window.NewLesson;
+                BaseLesson newLesson = window.NewLesson;
                 CreateLesson(newLesson);
                 RefreshButton_Click();
             }
@@ -61,7 +61,7 @@ namespace School_Schedule
             Saturday, Sunday };
         }
 
-        private void CreateLesson(Lesson lesson)
+        private void CreateLesson(BaseLesson lesson)
         {
             int top = lesson.Start.Hour *60 + lesson.Start.Minute;
             int bottom = lesson.End.Hour*60 + lesson.End.Minute;
@@ -95,7 +95,7 @@ namespace School_Schedule
                 Background = new SolidColorBrush(Color.FromRgb(231, 113, 125)),
             };
             Canvas.SetTop(lessonButton, top);
-            switch (lesson.DayOfWeek)
+            switch (lesson.GetDayOfWeek())
             {
                 case DayOfWeek.Monday: Monday.Children.Add(lessonButton); break;
                 case DayOfWeek.Tuesday: Tuesday.Children.Add(lessonButton); break;
@@ -162,7 +162,7 @@ namespace School_Schedule
 
         private void RemoveDeletedLessons()
         {
-            DeleteQueueService deleteQueueService = new DeleteQueueService();
+            DeleteService deleteQueueService = new DeleteService();
             List<TextBlock> toDelete = deleteQueueService.GetList();
             foreach(TextBlock item in toDelete)
             {
@@ -176,6 +176,8 @@ namespace School_Schedule
         {
             SetCurrentLesson();
             //і ще має бути функція зміни кольору з червоного на зелений, якщо урок уже триває
+            LessonBlocksService lessonBlocksService = new LessonBlocksService();
+            lessonBlocksService.DeleteOneTimeLessonsThatAreGone();
             RemoveDeletedLessons();
         }
 
@@ -184,8 +186,7 @@ namespace School_Schedule
             object originalSource = e.OriginalSource;
             if (originalSource is TextBlock block)
             {
-                //if (LessonButtons.ContainsKey(block))
-                Lesson lesson = LessonBlocksService.GetValue(block);
+                BaseLesson lesson = LessonBlocksService.GetValue(block);
                 if(LessonBlocksService.ContainsKey(block) && lesson != null)
                 {
                     lesson.ShowInfo();

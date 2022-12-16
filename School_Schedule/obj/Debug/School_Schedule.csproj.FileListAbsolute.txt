@@ -6,7 +6,6 @@ E:\all_projects\OOP_new\School_Schedule\School_Schedule\obj\Debug\School_Schedul
 E:\all_projects\OOP_new\School_Schedule\School_Schedule\obj\Debug\MainWindow.g.cs
 E:\all_projects\OOP_new\School_Schedule\School_Schedule\obj\Debug\App.g.cs
 E:\all_projects\OOP_new\School_Schedule\School_Schedule\obj\Debug\School_Schedule_MarkupCompile.cache
-E:\all_projects\OOP_new\School_Schedule\School_Schedule\obj\Debug\School_Schedule_MarkupCompile.lref
 E:\all_projects\OOP_new\School_Schedule\School_Schedule\obj\Debug\MainWindow.baml
 E:\all_projects\OOP_new\School_Schedule\School_Schedule\obj\Debug\School_Schedule.g.resources
 E:\all_projects\OOP_new\School_Schedule\School_Schedule\obj\Debug\School_Schedule.Properties.Resources.resources

@@ -10,9 +10,9 @@ namespace School_Schedule
     /// </summary>
     public partial class LessonShowInfo : Window
     {
-        private Lesson Lesson { get; set; }
+        private BaseLesson Lesson { get; set; }
 
-        public LessonShowInfo(Lesson lesson)
+        public LessonShowInfo(BaseLesson lesson)
         {
             InitializeComponent();
             Lesson = lesson;
@@ -27,7 +27,9 @@ namespace School_Schedule
         {
             SubjectInfo.Text = $"{Lesson.Subject.Name}";
             TeacherInfo.Text = $"{Lesson.Teacher.Name} {Lesson.Teacher.Surname} {Lesson.Teacher.Patronymic}";
-            TimeInfo.Text = $"{Lesson.DayOfWeek} {Lesson.Start.Hour}:{Lesson.Start.Minute}-" +
+
+            TimeInfo.Text = GetFullTimeInfo();
+            TimeInfo.Text += $"{Lesson.Start.Hour}:{Lesson.Start.Minute}-" +
                     $"{Lesson.End.Hour}:{Lesson.End.Minute}";
             //про вчителя інформація повинна показуватися відповідно до того, приватний він чи шкільний
             FullTeacherInfo.Content = $"Phone: {Lesson.Teacher.PhoneNumber}\n{GetFullTeacherInfo()}\n" +
@@ -36,21 +38,35 @@ namespace School_Schedule
                 $"Homework: {Lesson.Subject.Homework}";
         }
 
+        private string GetFullTimeInfo()
+        {
+            try
+            {
+                RegularLesson rLesson = (RegularLesson)Lesson;
+                return $"{rLesson.DayOfWeek} ";
+            } catch { }
+            try
+            {
+                OneTimeLesson oneLesson = (OneTimeLesson)Lesson;
+                return $"{oneLesson.Date.Day}.{oneLesson.Date.Month}.{oneLesson.Date.Year} ";
+            } catch {}
+            return "";
+        }
+
         private string GetFullTeacherInfo()
         {
             Teacher teacher = Lesson.Teacher;
-            string answer = "";
             try
             {
                 SchoolTeacher sTeacher = (SchoolTeacher) teacher;
-                answer = $"Office: {sTeacher.OfficeNumber}";
+                return $"Office: {sTeacher.OfficeNumber}";
             } catch { }
             try
             {
                 PrivateTeacher pTeacher = (PrivateTeacher) teacher;
-                answer = $"Price of lesson: {pTeacher.PriceOfLesson} \nAddress: {pTeacher.Address}";
+                return $"Price of lesson: {pTeacher.PriceOfLesson} \nAddress: {pTeacher.Address}";
             } catch { }
-            return answer;
+            return "";
         }
 
         private void OkayButton_Click(object sender, RoutedEventArgs e)
@@ -60,10 +76,8 @@ namespace School_Schedule
 
         private void DeleteLessonButton_Click(object sender, RoutedEventArgs e)
         {
-            LessonBlocksService lessonBlocksService = new LessonBlocksService();
-            DeleteQueueService deleteQueueService = new DeleteQueueService();
-            deleteQueueService.Add(lessonBlocksService.GetKeyByValue(Lesson));
-            lessonBlocksService.DeleteByValue(Lesson);
+            DeleteService deleteService = new DeleteService();
+            deleteService.MoveToTrash(Lesson);
             MessageBox.Show("Deleted Successfully");
             Close();
         }

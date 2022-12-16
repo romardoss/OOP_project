@@ -89,12 +89,12 @@
       <DependentUpon>CreateSubjectWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="DataBase\DataBase.cs" />
-    <Compile Include="DataBase\IServices\IDeleteQueueService.cs" />
+    <Compile Include="DataBase\IServices\IDeleteService.cs" />
     <Compile Include="DataBase\IServices\ILessonBlocksService.cs" />
     <Compile Include="DataBase\IServices\ILessonService.cs" />
     <Compile Include="DataBase\IServices\ISubjectService.cs" />
     <Compile Include="DataBase\IServices\ITeacherService.cs" />
-    <Compile Include="DataBase\Services\DeleteQueueService.cs" />
+    <Compile Include="DataBase\Services\DeleteService.cs" />
     <Compile Include="DataBase\Services\LessonBlocksService.cs" />
     <Compile Include="DataBase\Services\LessonService.cs" />
     <Compile Include="DataBase\Services\SubjectService.cs" />
@@ -102,8 +102,9 @@
     <Compile Include="LessonShowInfo.xaml.cs">
       <DependentUpon>LessonShowInfo.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Logic\LessonFolder\Lesson.cs" />
-    <Compile Include="Logic\ScheduleFolder\Schedule.cs" />
+    <Compile Include="Logic\LessonFolder\BaseLesson.cs" />
+    <Compile Include="Logic\LessonFolder\RegularLesson.cs" />
+    <Compile Include="Logic\LessonFolder\OneTimeLesson.cs" />
     <Compile Include="Logic\SubjectFolder\Subject.cs" />
     <Compile Include="Logic\TeacherFolder\PrivateTeacher.cs" />
     <Compile Include="Logic\TeacherFolder\SchoolTeacher.cs" />

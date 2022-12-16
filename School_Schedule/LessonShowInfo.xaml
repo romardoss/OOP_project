@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Lesson Information" WindowStyle="None" Height="450" Width="500" Loaded="Window_Loaded"
+        Title="Lesson Information" Height="450" Width="500" Loaded="Window_Loaded"
         Background="#7e685a">
     <Window.Resources>
         <Style TargetType="{x:Type TextBlock}">
