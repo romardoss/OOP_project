@@ -21,3 +21,6 @@ E:\all_projects\OOP_new\School_Schedule\School_Schedule\obj\Debug\CreateSubjectW
 E:\all_projects\OOP_new\School_Schedule\School_Schedule\obj\Debug\CreateSubjectWindow.baml
 E:\all_projects\OOP_new\School_Schedule\School_Schedule\obj\Debug\LessonShowInfo.g.cs
 E:\all_projects\OOP_new\School_Schedule\School_Schedule\obj\Debug\LessonShowInfo.baml
+E:\all_projects\OOP_new\School_Schedule\School_Schedule\bin\Debug\Newtonsoft.Json.dll
+E:\all_projects\OOP_new\School_Schedule\School_Schedule\bin\Debug\Newtonsoft.Json.xml
+E:\all_projects\OOP_new\School_Schedule\School_Schedule\obj\Debug\School_Schedule.csproj.CopyComplete

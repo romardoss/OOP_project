@@ -19,5 +19,31 @@ namespace School_Schedule.DataBase.Services
         {
             return DataBase.Lessons;
         }
+
+        public List<OneTimeLesson> GetOneTime()
+        {
+            List <OneTimeLesson> list = new List<OneTimeLesson>();
+            foreach(var item in Get())
+            {
+                if(item.GetType() == typeof(OneTimeLesson))
+                {
+                    list.Add((OneTimeLesson)item);
+                }
+            }
+            return list;
+        }
+
+        public List<RegularLesson> GetRegular()
+        {
+            List<RegularLesson> list = new List<RegularLesson>();
+            foreach (var item in Get())
+            {
+                if (item.GetType() == typeof(RegularLesson))
+                {
+                    list.Add((RegularLesson)item);
+                }
+            }
+            return list;
+        }
     }
 }

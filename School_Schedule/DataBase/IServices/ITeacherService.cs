@@ -6,6 +6,8 @@ namespace School_Schedule.DataBase
     public interface ITeacherService
     {
         List<Teacher> Get();
+        List<PrivateTeacher> GetPrivateTeachers();
+        List<SchoolTeacher> GetSchoolTeachers();
         List<string> GetNames();
         List<string> GetSurnames();
         List<string> GetPatronymics();

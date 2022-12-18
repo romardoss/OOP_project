@@ -9,6 +9,7 @@ using School_Schedule.Logic.SubjectFolder;
 using School_Schedule.Logic.TeacherFolder;
 using School_Schedule.Logic.LessonFolder;
 using School_Schedule.DataBase.Services;
+using School_Schedule.DataBase.FileReadWrite;
 
 namespace School_Schedule
 {
@@ -46,8 +47,6 @@ namespace School_Schedule
             new Subject("Physic", "nothing", "", "");
             new Subject("History", "nothing", "", "");
             new Subject("Language", "nothing", "", "");
-            new SchoolTeacher("Oleg", "Slyva", "Oleksandrovich", "000", "12", "");
-            new SchoolTeacher("Andrew", "Slyva", "Oleksandrovich", "000", "12", "");
 
             CreateTimeLine();
             CreateCurrentTimeLine();
@@ -168,7 +167,6 @@ namespace School_Schedule
             List<TextBlock> toDelete = deleteQueueService.GetList();
             foreach(TextBlock item in toDelete)
             {
-                Monday.Children.Remove(item);
                 Canvases.ForEach(x => x.Children.Remove(item));
             }
             deleteQueueService.Clean();
@@ -182,6 +180,9 @@ namespace School_Schedule
             lessonBlocksService.DeleteOneTimeLessonsThatAreGone();
             RemoveDeletedLessons();
             SetNotCurrentLessons();
+
+            ReadWriteManager readWriteManager = new ReadWriteManager();
+            readWriteManager.Import();
         }
 
         private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -196,6 +197,14 @@ namespace School_Schedule
                     RefreshButton_Click();
                 }
             }
+        }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            ReadWriteManager readWriteManager = new ReadWriteManager();
+            readWriteManager.Save();
+            MessageBox.Show("Hello, " + Environment.UserName);
+            MessageBox.Show("In Developing");
         }
     }
 }

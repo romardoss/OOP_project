@@ -41,6 +41,8 @@
         <Button x:Name="RefreshButton" Content="Refresh" 
                 Width="100" Height="30" Background="#afd274" HorizontalAlignment="Left" Margin="20,0,0,0" Click="RefreshButton_Click" 
                 />
+        <Button x:Name="SaveButton" Content="Save" Width="100" Height="30" Background="#afd274" 
+                HorizontalAlignment="Right" Margin="0,0,20,0" Click="SaveButton_Click" />
         <Grid Grid.Row="1" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50"/>

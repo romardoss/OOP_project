@@ -1,6 +1,6 @@
 ﻿namespace School_Schedule.Logic.TeacherFolder
 {
-    internal class SchoolTeacher:Teacher
+    public class SchoolTeacher:Teacher
     {
         public string OfficeNumber { get; set; }
 

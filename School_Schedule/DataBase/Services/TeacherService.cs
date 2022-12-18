@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 using School_Schedule.Logic.TeacherFolder;
 
 namespace School_Schedule.DataBase.Services
@@ -35,5 +37,33 @@ namespace School_Schedule.DataBase.Services
         {
             return DataBase.Teachers.Select(x => x.Surname).ToList();
         }
+
+        public List<PrivateTeacher> GetPrivateTeachers()
+        {
+            List<PrivateTeacher> list = new List<PrivateTeacher>();
+            foreach (var item in Get())
+            {
+                if (item.GetType() == typeof(PrivateTeacher))
+                {
+                    list.Add((PrivateTeacher)item);
+                }
+            }
+            return list;
+        }
+
+        public List<SchoolTeacher> GetSchoolTeachers()
+        {
+            List<SchoolTeacher> list = new List<SchoolTeacher>();
+
+            foreach (var teacher in Get())
+            {
+                if (teacher.GetType() == typeof(SchoolTeacher))
+                {
+                    list.Add((SchoolTeacher)teacher);
+                }
+            }
+            return list;
+        }
+
     }
 }

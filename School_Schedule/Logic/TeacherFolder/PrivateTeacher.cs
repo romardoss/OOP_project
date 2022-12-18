@@ -1,6 +1,6 @@
 ﻿namespace School_Schedule.Logic.TeacherFolder
 {
-    internal class PrivateTeacher : Teacher
+    public class PrivateTeacher : Teacher
     {
         public string Address { get; set; }
         public int PriceOfLesson { get; set; }
