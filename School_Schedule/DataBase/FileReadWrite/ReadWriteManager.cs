@@ -54,8 +54,16 @@ namespace School_Schedule.DataBase.FileReadWrite
 
             if (File.Exists(pathRegular))
             {
-                string inputText = File.ReadAllText(pathRegular);
-                regularList = JsonConvert.DeserializeObject<List<RegularLesson>>(inputText);
+                try
+                {
+                    string inputText = File.ReadAllText(pathRegular);
+                    regularList = JsonConvert.DeserializeObject<List<RegularLesson>>(inputText);
+                }
+                catch(Exception e)
+                {
+                    MessageBox.Show("Problems with regular lesson reading");
+                    MessageBox.Show(e.Message);
+                }
             }
             else
             {
@@ -64,8 +72,17 @@ namespace School_Schedule.DataBase.FileReadWrite
 
             if (File.Exists(pathOneTime))
             {
-                string inputText = File.ReadAllText(pathOneTime);
-                oneTimeList = JsonConvert.DeserializeObject<List<OneTimeLesson>>(inputText);
+                try
+                {
+                    string inputText = File.ReadAllText(pathOneTime);
+                    oneTimeList = JsonConvert.DeserializeObject<List<OneTimeLesson>>(inputText);
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Problems with one time lesson reading");
+                    MessageBox.Show(e.Message);
+                }
+                
             }
             else
             {
@@ -121,6 +138,7 @@ namespace School_Schedule.DataBase.FileReadWrite
                 MessageBox.Show("Unable to find a file with data");
             }
             allTeachers = allTeachers.Concat(schoolTeachersList).Concat(privateTeachersList).ToList();
+            //MessageBox.Show(String.Join(" ", allTeachers));
             return allTeachers;
         }
 
@@ -141,6 +159,8 @@ namespace School_Schedule.DataBase.FileReadWrite
             path = GetPath(RegularLessonFileName);
             File.WriteAllText(path, jsonContent);
         }
+
+        
 
         public void WriteSubjects()
         {
@@ -164,7 +184,7 @@ namespace School_Schedule.DataBase.FileReadWrite
         {
             CheckAndCreateDirectory();
 
-            WriteLessonBlocks();
+            //WriteLessonBlocks();
             WriteSubjects();
             WriteLessons();
             WriteTeachers();

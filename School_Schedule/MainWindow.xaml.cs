@@ -33,7 +33,7 @@ namespace School_Schedule
             if(window.NewLesson != null)
             {
                 BaseLesson newLesson = window.NewLesson;
-                CreateLesson(newLesson);
+                CreateLessonBlock(newLesson);
                 RefreshButton_Click();
             }
             //отримую з методів іншого вікна значення нового предмету
@@ -43,19 +43,24 @@ namespace School_Schedule
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            new Subject("Math", "nothing", "", "");
-            new Subject("Physic", "nothing", "", "");
-            new Subject("History", "nothing", "", "");
-            new Subject("Language", "nothing", "", "");
-
             CreateTimeLine();
             CreateCurrentTimeLine();
             RefreshButton_Click();
             Canvases = new List<Canvas> { Monday, Tuesday, Wednesday, Thursday, Friday,
             Saturday, Sunday };
+
+            ReadWriteManager readWriteManager = new ReadWriteManager();
+            try
+            {
+                readWriteManager.Import();
+            }
+            catch(Exception k)
+            {
+                MessageBox.Show(k.Message);
+            }
         }
 
-        private void CreateLesson(BaseLesson lesson)
+        private TextBlock CreateLessonBlock(BaseLesson lesson)
         {
             int top = lesson.Start.Hour *60 + lesson.Start.Minute;
             int bottom = lesson.End.Hour*60 + lesson.End.Minute;
@@ -64,21 +69,21 @@ namespace School_Schedule
             string text;
             if (height >= 60)
             {
-                text = $"{lesson.Subject.Name}\n{lesson.Teacher.Name}" +
+                text = $"{lesson.GetSubject().Name}\n{lesson.GetTeacher().Name}" +
                     $"\n{lesson.Start.Hour}:{lesson.Start.Minute}-" +
                     $"{lesson.End.Hour}:{lesson.End.Minute}";
             }
             else if (height > 40)
             {
-                text = $"{lesson.Subject.Name}\n{lesson.Start.Hour}:{lesson.Start.Minute}-" +
+                text = $"{lesson.GetSubject().Name}\n{lesson.Start.Hour}:{lesson.Start.Minute}-" +
                     $"{lesson.End.Hour}:{lesson.End.Minute}";
             }
             else
             {
-                text = $"{lesson.Subject.Name}";
+                text = $"{lesson.GetSubject().Name}";
             }
 
-            TextBlock lessonButton = new TextBlock
+            TextBlock block = new TextBlock
             {
                 HorizontalAlignment = HorizontalAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Center,
@@ -88,18 +93,34 @@ namespace School_Schedule
                 Height = height,
                 Background = new SolidColorBrush(Color.FromRgb(231, 113, 125)),
             };
-            Canvas.SetTop(lessonButton, top);
+            Canvas.SetTop(block, top);
+            LessonBlocksService.Add(block, lesson);
+            //AddLessonBlockToTheCanvas(lesson, block);
+            return block;
+        }
+
+        private void AddLessonBlockToTheCanvas(BaseLesson lesson, TextBlock block)
+        {
             switch (lesson.GetDayOfWeek())
             {
-                case DayOfWeek.Monday: Monday.Children.Add(lessonButton); break;
-                case DayOfWeek.Tuesday: Tuesday.Children.Add(lessonButton); break;
-                case DayOfWeek.Wednesday: Wednesday.Children.Add(lessonButton); break;
-                case DayOfWeek.Thursday: Thursday.Children.Add(lessonButton); break;
-                case DayOfWeek.Friday: Friday.Children.Add(lessonButton); break;
-                case DayOfWeek.Saturday: Saturday.Children.Add(lessonButton); break;
-                case DayOfWeek.Sunday: Sunday.Children.Add(lessonButton); break;
+                case DayOfWeek.Monday: Monday.Children.Add(block); break;
+                case DayOfWeek.Tuesday: Tuesday.Children.Add(block); break;
+                case DayOfWeek.Wednesday: Wednesday.Children.Add(block); break;
+                case DayOfWeek.Thursday: Thursday.Children.Add(block); break;
+                case DayOfWeek.Friday: Friday.Children.Add(block); break;
+                case DayOfWeek.Saturday: Saturday.Children.Add(block); break;
+                case DayOfWeek.Sunday: Sunday.Children.Add(block); break;
             }
-            LessonBlocksService.Add(lessonButton, lesson);
+        }
+
+        private void UpdateLessonBlocksOnCanvas()
+        {
+            LessonService lessonService = new LessonService();
+            foreach (var lesson in lessonService.Get())
+            {
+                TextBlock block = CreateLessonBlock(lesson);
+                AddLessonBlockToTheCanvas(lesson, block);
+            }
         }
 
         private void CreateTimeLine()
@@ -154,7 +175,7 @@ namespace School_Schedule
         private void SetNotCurrentLessons()
         {
             LessonBlocksService lessonBlocksService = new LessonBlocksService();
-            List<TextBlock> notCurrentLessons = lessonBlocksService.GetLessonsThatIsNotCurrentNow();
+            List<TextBlock> notCurrentLessons = lessonBlocksService.GetLessonsThatAreNotCurrentNow();
             foreach(var block in notCurrentLessons)
             {
                 block.Background = new SolidColorBrush(Color.FromRgb(231, 113, 125));
@@ -180,9 +201,7 @@ namespace School_Schedule
             lessonBlocksService.DeleteOneTimeLessonsThatAreGone();
             RemoveDeletedLessons();
             SetNotCurrentLessons();
-
-            ReadWriteManager readWriteManager = new ReadWriteManager();
-            readWriteManager.Import();
+            UpdateLessonBlocksOnCanvas();
         }
 
         private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -191,7 +210,7 @@ namespace School_Schedule
             if (originalSource is TextBlock block)
             {
                 BaseLesson lesson = LessonBlocksService.GetValue(block);
-                if(LessonBlocksService.ContainsKey(block) && lesson != null)
+                if (LessonBlocksService.ContainsKey(block) && lesson != null)
                 {
                     lesson.ShowInfo();
                     RefreshButton_Click();

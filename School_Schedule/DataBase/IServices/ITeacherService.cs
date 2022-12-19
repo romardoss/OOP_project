@@ -13,5 +13,6 @@ namespace School_Schedule.DataBase
         List<string> GetPatronymics();
         Teacher GetByName(string name);
         void Add(Teacher teacher);
+        Teacher GetTeacherByID(int id);
     }
 }

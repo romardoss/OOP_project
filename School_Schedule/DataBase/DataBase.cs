@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
 using School_Schedule.DataBase.FileReadWrite;
 using School_Schedule.Logic.LessonFolder;
@@ -19,10 +21,37 @@ namespace School_Schedule.DataBase
 
         public void UpdateDatabase()
         {
-            Teachers = ReadWriteManager.ReadTeachers();
-            Subjects = ReadWriteManager.ReadSubjects();
-            Lessons = ReadWriteManager.ReadLessons();
-            LessonBlocks = ReadWriteManager.ReadLessonBlocks();
+            //Teachers = ReadWriteManager.ReadTeachers();
+            //Subjects = ReadWriteManager.ReadSubjects();
+            //Lessons = ReadWriteManager.ReadLessons();
+            try
+            {
+                Teachers = ReadWriteManager.ReadTeachers();
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show("Teacher read error");
+                MessageBox.Show(e.Message);
+            }
+            try
+            {
+                Subjects = ReadWriteManager.ReadSubjects();
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show("Subjects read error");
+                MessageBox.Show(e.Message);
+            }
+            try
+            {
+                Lessons = ReadWriteManager.ReadLessons();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Lessons read error");
+                MessageBox.Show(e.Message);
+            }
+
         }
     }
 }

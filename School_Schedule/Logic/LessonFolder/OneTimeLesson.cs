@@ -6,7 +6,6 @@ namespace School_Schedule.Logic.LessonFolder
 {
     public class OneTimeLesson : BaseLesson
     {
-
         public OneTimeLesson(Subject subject, Teacher teacher, string timeStart, 
             string timeEnd, DateTime date)
             : base(subject, teacher, timeStart, timeEnd)

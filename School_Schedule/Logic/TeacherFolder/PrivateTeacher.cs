@@ -2,8 +2,8 @@
 {
     public class PrivateTeacher : Teacher
     {
-        public string Address { get; set; }
-        public int PriceOfLesson { get; set; }
+        public string Address { get; }
+        public int PriceOfLesson { get; }
 
         public PrivateTeacher(string name, string surname, string patronymic, 
             string phone, string address, int price, string additionalInfo) 
@@ -11,11 +11,6 @@
         {
             Address = address;
             PriceOfLesson = price;
-        }
-
-        public override void ChangeInfo()
-        {
-            
         }
     }
 }

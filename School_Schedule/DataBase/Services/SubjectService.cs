@@ -25,5 +25,17 @@ namespace School_Schedule.DataBase.Services
         {
             return DataBase.Subjects.Select(x => x.Name).ToList();
         }
+
+        public Subject GetById(int id)
+        {
+            foreach(var subject in Get())
+            {
+                if(subject.ID == id)
+                {
+                    return subject;
+                }
+            }
+            return null;
+        }
     }
 }

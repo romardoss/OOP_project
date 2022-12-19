@@ -25,17 +25,17 @@ namespace School_Schedule
 
         private void GenerateLessonInfo()
         {
-            SubjectInfo.Text = $"{Lesson.Subject.Name}";
-            TeacherInfo.Text = $"{Lesson.Teacher.Name} {Lesson.Teacher.Surname} {Lesson.Teacher.Patronymic}";
+            SubjectInfo.Text = $"{Lesson.GetSubject().Name}";
+            TeacherInfo.Text = $"{Lesson.GetTeacher().Name} {Lesson.GetTeacher().Surname} {Lesson.GetTeacher().Patronymic}";
 
             TimeInfo.Text = GetFullTimeInfo();
             TimeInfo.Text += $"{Lesson.Start.Hour}:{Lesson.Start.Minute}-" +
                     $"{Lesson.End.Hour}:{Lesson.End.Minute}";
             //про вчителя інформація повинна показуватися відповідно до того, приватний він чи шкільний
-            FullTeacherInfo.Content = $"Phone: {Lesson.Teacher.PhoneNumber}\n{GetFullTeacherInfo()}\n" +
-                $"{Lesson.Teacher.AdditionalInfo}";
-            LessonInfo.Content = $"Type: {Lesson.Subject.Type} \nLink: {Lesson.Subject.Link}\n" +
-                $"Homework: {Lesson.Subject.Homework}";
+            FullTeacherInfo.Content = $"Phone: {Lesson.GetTeacher().PhoneNumber}\n{GetFullTeacherInfo()}\n" +
+                $"{Lesson.GetTeacher().AdditionalInfo}";
+            LessonInfo.Content = $"Type: {Lesson.GetSubject().Type} \nLink: {Lesson.GetSubject().Link}\n" +
+                $"Homework: {Lesson.GetSubject().Homework}";
         }
 
         private string GetFullTimeInfo()
@@ -55,7 +55,7 @@ namespace School_Schedule
 
         private string GetFullTeacherInfo()
         {
-            Teacher teacher = Lesson.Teacher;
+            Teacher teacher = Lesson.GetTeacher();
             try
             {
                 SchoolTeacher sTeacher = (SchoolTeacher) teacher;

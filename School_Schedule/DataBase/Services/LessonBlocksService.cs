@@ -50,6 +50,7 @@ namespace School_Schedule.DataBase.Services
         {
             if (!DataBase.LessonBlocks.TryGetValue(block, out BaseLesson lesson))
             {
+                MessageBox.Show("Unable to find the lesson");
                 return null;
             }
             return lesson;
@@ -84,7 +85,7 @@ namespace School_Schedule.DataBase.Services
             //з бази даних і цикл foreach (BaseLesson lesson in lessonService.Get()) крашиться
         }
 
-        public List<TextBlock> GetLessonsThatIsNotCurrentNow()
+        public List<TextBlock> GetLessonsThatAreNotCurrentNow()
         {
             var temp = Get().Values.Where(x => !x.IsNow()).ToList();
             List<TextBlock> result = new List<TextBlock>();

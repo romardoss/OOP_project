@@ -65,5 +65,17 @@ namespace School_Schedule.DataBase.Services
             return list;
         }
 
+        public Teacher GetTeacherByID(int id)
+        {
+            foreach(var teacher in Get())
+            {
+                if(teacher.ID == id)
+                {
+                    return teacher;
+                }
+            }
+            return null;
+        }
+
     }
 }

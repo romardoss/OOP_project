@@ -15,6 +15,6 @@ namespace School_Schedule.DataBase.IServices
         void Delete(TextBlock block);
         void DeleteByValue(BaseLesson lesson);
         void DeleteOneTimeLessonsThatAreGone();
-        List<TextBlock> GetLessonsThatIsNotCurrentNow();
+        List<TextBlock> GetLessonsThatAreNotCurrentNow();
     }
 }

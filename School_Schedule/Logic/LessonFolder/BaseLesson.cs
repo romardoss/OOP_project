@@ -7,16 +7,15 @@ namespace School_Schedule.Logic.LessonFolder
 {
     public abstract class BaseLesson
     {
-        protected readonly LessonService LessonService = new LessonService();
-        public Subject Subject { get; set; }
-        public Teacher Teacher { get; set; }
+        public int SubjectID { get; }
+        public int TeacherID { get; }
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
 
         public BaseLesson(Subject subject, Teacher teacher, string timeStart, string timeEnd)
         {
-            Subject = subject;
-            Teacher = teacher;
+            SubjectID = subject.ID;
+            TeacherID = teacher.ID;
 
             string[] timeComponents = timeStart.Split(':');
             int hours = int.Parse(timeComponents[0]);
@@ -30,7 +29,20 @@ namespace School_Schedule.Logic.LessonFolder
             End = new DateTime(DateTime.Today.Year,
                 DateTime.Today.Month, DateTime.Today.Day, hours, minutes, 0);
 
+            LessonService LessonService = new LessonService();
             LessonService.Add(this);
+        }
+
+        public Teacher GetTeacher()
+        {
+            TeacherService teacherService = new TeacherService();
+            return teacherService.GetTeacherByID(TeacherID);
+        }
+
+        public Subject GetSubject()
+        {
+            SubjectService subjectService = new SubjectService();
+            return subjectService.GetById(SubjectID);
         }
 
         public virtual bool IsNow()
