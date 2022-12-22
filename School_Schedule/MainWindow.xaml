@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Schedule" Height="450" Width="800" Loaded="Window_Loaded" Background="#FF7E685A" >
+        Title="Schedule" Height="675" Width="1200" Loaded="Window_Loaded" Background="#FF7E685A" >
     <Window.Resources>
         <Style TargetType="Canvas">
             <Setter Property="Background" Value="#c2c9cf"/>
@@ -36,7 +36,7 @@
             <RowDefinition Height="20"/>
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
-        <Button Content="Додати урок" Click="Button_Click" 
+        <Button Content="Add new lesson" Click="Button_Click" 
                 Width="150" Height="30" Background="#afd274"/>
         <Button x:Name="RefreshButton" Content="Refresh" 
                 Width="100" Height="30" Background="#afd274" HorizontalAlignment="Left" Margin="20,0,0,0" Click="RefreshButton_Click" 

@@ -29,8 +29,8 @@ namespace School_Schedule
             TeacherInfo.Text = $"{Lesson.GetTeacher().Name} {Lesson.GetTeacher().Surname} {Lesson.GetTeacher().Patronymic}";
 
             TimeInfo.Text = GetFullTimeInfo();
-            TimeInfo.Text += $"{Lesson.Start.Hour}:{Lesson.Start.Minute}-" +
-                    $"{Lesson.End.Hour}:{Lesson.End.Minute}";
+            TimeInfo.Text += $"{Lesson.GetStartTime().Hour}:{Lesson.GetStartTime().Minute}-" +
+                    $"{Lesson.GetEndTime().Hour}:{Lesson.GetEndTime().Minute}";
             //про вчителя інформація повинна показуватися відповідно до того, приватний він чи шкільний
             FullTeacherInfo.Content = $"Phone: {Lesson.GetTeacher().PhoneNumber}\n{GetFullTeacherInfo()}\n" +
                 $"{Lesson.GetTeacher().AdditionalInfo}";
@@ -48,7 +48,7 @@ namespace School_Schedule
             try
             {
                 OneTimeLesson oneLesson = (OneTimeLesson)Lesson;
-                return $"{oneLesson.Start.Day}.{oneLesson.Start.Month}.{oneLesson.Start.Year} ";
+                return $"{oneLesson.GetStartTime().Day}.{oneLesson.GetStartTime().Month}.{oneLesson.GetStartTime().Year} ";
             } catch {}
             return "";
         }

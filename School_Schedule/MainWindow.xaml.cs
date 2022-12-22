@@ -5,8 +5,6 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using School_Schedule.Logic.SubjectFolder;
-using School_Schedule.Logic.TeacherFolder;
 using School_Schedule.Logic.LessonFolder;
 using School_Schedule.DataBase.Services;
 using School_Schedule.DataBase.FileReadWrite;
@@ -58,25 +56,26 @@ namespace School_Schedule
             {
                 MessageBox.Show(k.Message);
             }
+            UpdateLessonBlocksOnCanvas();
         }
 
         private TextBlock CreateLessonBlock(BaseLesson lesson)
         {
-            int top = lesson.Start.Hour *60 + lesson.Start.Minute;
-            int bottom = lesson.End.Hour*60 + lesson.End.Minute;
+            int top = lesson.GetStartTime().Hour *60 + lesson.GetStartTime().Minute;
+            int bottom = lesson.GetEndTime().Hour*60 + lesson.GetEndTime().Minute;
             int height = bottom - top;
 
             string text;
             if (height >= 60)
             {
                 text = $"{lesson.GetSubject().Name}\n{lesson.GetTeacher().Name}" +
-                    $"\n{lesson.Start.Hour}:{lesson.Start.Minute}-" +
-                    $"{lesson.End.Hour}:{lesson.End.Minute}";
+                    $"\n{lesson.GetStartTime().Hour}:{lesson.GetStartTime().Minute}-" +
+                    $"{lesson.GetEndTime().Hour}:{lesson.GetEndTime().Minute}";
             }
             else if (height > 40)
             {
-                text = $"{lesson.GetSubject().Name}\n{lesson.Start.Hour}:{lesson.Start.Minute}-" +
-                    $"{lesson.End.Hour}:{lesson.End.Minute}";
+                text = $"{lesson.GetSubject().Name}\n{lesson.GetStartTime().Hour}:{lesson.GetStartTime().Minute}-" +
+                    $"{lesson.GetEndTime().Hour}:{lesson.GetEndTime().Minute}";
             }
             else
             {
@@ -95,21 +94,20 @@ namespace School_Schedule
             };
             Canvas.SetTop(block, top);
             LessonBlocksService.Add(block, lesson);
-            //AddLessonBlockToTheCanvas(lesson, block);
             return block;
         }
 
         private void AddLessonBlockToTheCanvas(BaseLesson lesson, TextBlock block)
         {
-            switch (lesson.GetDayOfWeek())
+            switch ((int)lesson.GetDayOfWeek())
             {
-                case DayOfWeek.Monday: Monday.Children.Add(block); break;
-                case DayOfWeek.Tuesday: Tuesday.Children.Add(block); break;
-                case DayOfWeek.Wednesday: Wednesday.Children.Add(block); break;
-                case DayOfWeek.Thursday: Thursday.Children.Add(block); break;
-                case DayOfWeek.Friday: Friday.Children.Add(block); break;
-                case DayOfWeek.Saturday: Saturday.Children.Add(block); break;
-                case DayOfWeek.Sunday: Sunday.Children.Add(block); break;
+                case 1: Monday.Children.Add(block); break;
+                case 2: Tuesday.Children.Add(block); break;
+                case 3: Wednesday.Children.Add(block); break;
+                case 4: Thursday.Children.Add(block); break;
+                case 5: Friday.Children.Add(block); break;
+                case 6: Saturday.Children.Add(block); break;
+                case 7: Sunday.Children.Add(block); break;
             }
         }
 
@@ -222,7 +220,7 @@ namespace School_Schedule
         {
             ReadWriteManager readWriteManager = new ReadWriteManager();
             readWriteManager.Save();
-            MessageBox.Show("Hello, " + Environment.UserName);
+            //MessageBox.Show("Hello, " + Environment.UserName);
             MessageBox.Show("In Developing");
         }
     }

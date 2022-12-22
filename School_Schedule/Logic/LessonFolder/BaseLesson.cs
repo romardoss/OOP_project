@@ -9,25 +9,15 @@ namespace School_Schedule.Logic.LessonFolder
     {
         public int SubjectID { get; }
         public int TeacherID { get; }
-        public DateTime Start { get; set; }
-        public DateTime End { get; set; }
+        public string StartTime { get; set; }
+        public string EndTime { get; set; }
 
-        public BaseLesson(Subject subject, Teacher teacher, string timeStart, string timeEnd)
+        public BaseLesson(Subject subject, Teacher teacher, string startTime, string endTime)
         {
             SubjectID = subject.ID;
             TeacherID = teacher.ID;
-
-            string[] timeComponents = timeStart.Split(':');
-            int hours = int.Parse(timeComponents[0]);
-            int minutes = int.Parse(timeComponents[1]);
-            Start = new DateTime(DateTime.Today.Year,
-                DateTime.Today.Month, DateTime.Today.Day, hours, minutes, 0);
-
-            timeComponents = timeEnd.Split(':');
-            hours = int.Parse(timeComponents[0]);
-            minutes = int.Parse(timeComponents[1]);
-            End = new DateTime(DateTime.Today.Year,
-                DateTime.Today.Month, DateTime.Today.Day, hours, minutes, 0);
+            StartTime = startTime;
+            EndTime = endTime;
 
             LessonService LessonService = new LessonService();
             LessonService.Add(this);
@@ -45,11 +35,27 @@ namespace School_Schedule.Logic.LessonFolder
             return subjectService.GetById(SubjectID);
         }
 
+        public virtual DateTime GetStartTime()
+        {
+            string[] timeComponents = StartTime.Split(':');
+            int hours = int.Parse(timeComponents[0]);
+            int minutes = int.Parse(timeComponents[1]);
+            return new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, hours, minutes, 0);
+        }
+
+        public virtual DateTime GetEndTime()
+        {
+            var timeComponents = EndTime.Split(':');
+            var hours = int.Parse(timeComponents[0]);
+            var minutes = int.Parse(timeComponents[1]);
+            return new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, hours, minutes, 0);
+        }
+
         public virtual bool IsNow()
         {
             //кожен час переводиться у кількість хвилин
-            int startMinutes = Start.Hour * 60 + Start.Minute;
-            int endMinutes = End.Hour * 60 + End.Minute;
+            int startMinutes = GetStartTime().Hour * 60 + GetStartTime().Minute;
+            int endMinutes = GetEndTime().Hour * 60 + GetEndTime().Minute;
             DateTime now = DateTime.Now;
             int nowMinutes = now.Hour * 60 + now.Minute;
             return (nowMinutes > startMinutes) && (nowMinutes < endMinutes);

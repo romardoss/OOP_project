@@ -18,6 +18,9 @@ namespace School_Schedule
         public BaseLesson NewLesson;
         private readonly SubjectService SubjectService = new SubjectService();
         private readonly TeacherService TeacherService = new TeacherService();
+        private readonly List<string> DayOfWeekList = new List<string>{"Monday",
+                "Tuesday", "Wednesday", "Thursday", "Friday",
+                "Saturday", "Sunday"};
 
         public AddSubjectWindow()
         {
@@ -40,9 +43,7 @@ namespace School_Schedule
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             UpdateLists();
-            ChoseDayOfWeek.ItemsSource = new List<string>{"Monday", 
-                "Tuesday", "Wednesday", "Thursday", "Friday", 
-                "Saturday", "Sunday"};
+            ChoseDayOfWeek.ItemsSource = DayOfWeekList;
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
@@ -67,17 +68,7 @@ namespace School_Schedule
                 if (CheckBox.IsChecked == false && ChoseDayOfWeek.Text != "")
                 {
                     DayOfWeek dayOfWeek;
-                    switch (ChoseDayOfWeek.Text)
-                    {
-                        case "Monday": dayOfWeek = DayOfWeek.Monday; break;
-                        case "Tuesday": dayOfWeek = DayOfWeek.Tuesday; break;
-                        case "Wednesday": dayOfWeek = DayOfWeek.Wednesday; break;
-                        case "Thursday": dayOfWeek = DayOfWeek.Thursday; break;
-                        case "Friday": dayOfWeek = DayOfWeek.Friday; break;
-                        case "Saturday": dayOfWeek = DayOfWeek.Saturday; break;
-                        case "Sunday": dayOfWeek = DayOfWeek.Sunday; break;
-                        default: throw new Exception("The wrong day of week");
-                    }
+                    dayOfWeek = (DayOfWeek) (DayOfWeekList.IndexOf(ChoseDayOfWeek.Text) + 1);
 
                     NewLesson = new RegularLesson(subject, teacher, StartTime.Text, EndTime.Text, 
                         dayOfWeek);
@@ -87,8 +78,7 @@ namespace School_Schedule
                 else if (CheckBox.IsChecked == true && DateOfLesson.SelectedDate != null)
                 {
                     NewLesson = new OneTimeLesson(subject, teacher, StartTime.Text, 
-                        EndTime.Text, DateOfLesson.SelectedDate.Value);
-                    MessageBox.Show("In developing...");
+                    EndTime.Text, DateOfLesson.SelectedDate.Value);
                     Close();
                 }
                 else

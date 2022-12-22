@@ -15,7 +15,6 @@ namespace School_Schedule.DataBase.FileReadWrite
         void WriteTeachers();
         void WriteSubjects();
         void WriteLessons();
-        void WriteLessonBlocks();
         List<Teacher> ReadTeachers();
         List<Subject> ReadSubjects();
         List<BaseLesson> ReadLessons();

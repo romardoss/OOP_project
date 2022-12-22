@@ -1,9 +1,9 @@
 [
     {
-        "SubjectID": 1,
-        "TeacherID": 2,
-        "Start": "2022-12-19T08:30:00",
-        "End": "2022-12-19T09:15:00",
-        "DayOfWeek": 4
+        "DayOfWeek": 4,
+        "SubjectID": 2,
+        "TeacherID": 1,
+        "StartTime": "8:30",
+        "EndTime": "9:15"
     }
 ]

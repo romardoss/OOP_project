@@ -1,6 +1,8 @@
 ﻿using School_Schedule.Logic.SubjectFolder;
 using School_Schedule.Logic.TeacherFolder;
 using System;
+using System.Collections.Generic;
+using System.Windows;
 
 namespace School_Schedule.Logic.LessonFolder
 {
@@ -10,13 +12,35 @@ namespace School_Schedule.Logic.LessonFolder
             string timeEnd, DateTime date)
             : base(subject, teacher, timeStart, timeEnd)
         {
-            Start = new DateTime(date.Year, date.Month, date.Day, Start.Hour, Start.Minute, 0);
-            End = new DateTime(date.Year, date.Month, date.Day, End.Hour, End.Minute, 0);
+            StartTime = String.Join(" ", date.Year, date.Month, date.Day, base.GetStartTime().Hour, base.GetStartTime().Minute, 0).ToString();
+            EndTime = String.Join(" ", date.Year, date.Month, date.Day, base.GetEndTime().Hour, base.GetEndTime().Minute, 0).ToString();
+        }
+
+        public override DateTime GetStartTime()
+        {
+            string[] timeComponentsString = StartTime.Split(' ');
+            List<int> timeComponents = new List<int>();
+            foreach (string comp in timeComponentsString)
+            {
+                timeComponents.Add(int.Parse(comp));
+            }
+            return new DateTime(timeComponents[0], timeComponents[1], timeComponents[2], timeComponents[3], timeComponents[4], 0);
+        }
+
+        public override DateTime GetEndTime()
+        {
+            string[] timeComponentsString = EndTime.Split(' ');
+            List<int> timeComponents = new List<int>();
+            foreach (string comp in timeComponentsString)
+            {
+                timeComponents.Add(int.Parse(comp));
+            }
+            return new DateTime(timeComponents[0], timeComponents[1], timeComponents[2], timeComponents[3], timeComponents[4], 0);
         }
 
         public bool IsTimeToDelete()
         {
-            return DateTime.Now > End;
+            return DateTime.Now > GetEndTime();
         }
 
         public override void ShowInfo()
@@ -27,12 +51,12 @@ namespace School_Schedule.Logic.LessonFolder
 
         public override DayOfWeek GetDayOfWeek()
         {
-            return Start.DayOfWeek;
+            return GetStartTime().DayOfWeek;
         }
 
         public override bool IsNow()
         {
-            return (DateTime.Now > Start) && (DateTime.Now < End);
+            return (DateTime.Now > GetStartTime()) && (DateTime.Now < GetEndTime());
         }
     }
 }

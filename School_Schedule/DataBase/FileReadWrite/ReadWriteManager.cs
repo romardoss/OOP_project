@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using School_Schedule.DataBase.Services;
+﻿using School_Schedule.DataBase.Services;
 using School_Schedule.Logic.LessonFolder;
 using School_Schedule.Logic.SubjectFolder;
 using School_Schedule.Logic.TeacherFolder;
@@ -9,6 +8,11 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using Newtonsoft.Json;
+using System.Windows.Shapes;
+using System.Text;
 
 namespace School_Schedule.DataBase.FileReadWrite
 {
@@ -22,8 +26,8 @@ namespace School_Schedule.DataBase.FileReadWrite
         private readonly string PrivateTeacherFileName = "PrivateTeachersData.json";
         private readonly string SchoolTeacherFileName = "SchoolTeachersData.json";
         private readonly string SubjectFileName = "SubjectData.json";
-        private readonly string RegularLessonFileName = "RegularLessonData.json";
-        private readonly string OneTimeLessonFileName = "OneTimeLessonData.json";
+        private readonly string RegularLessonFileName = "RegularLessonData.csv";
+        private readonly string OneTimeLessonFileName = "OneTimeLessonData.csv";
         private readonly string LessonBlockFileName = "LessonBlockData.json";
 
         public Dictionary<TextBlock, BaseLesson> ReadLessonBlocks()
@@ -44,7 +48,7 @@ namespace School_Schedule.DataBase.FileReadWrite
             return blockList;
         }
 
-        public List<BaseLesson> ReadLessons()
+        /*public List<BaseLesson> ReadLessons()
         {
             string pathRegular = GetPath(RegularLessonFileName);
             List<RegularLesson> regularList = new List<RegularLesson>();
@@ -58,6 +62,9 @@ namespace School_Schedule.DataBase.FileReadWrite
                 {
                     string inputText = File.ReadAllText(pathRegular);
                     regularList = JsonConvert.DeserializeObject<List<RegularLesson>>(inputText);
+
+                    //string jsonString = File.ReadAllText(pathRegular);
+                    //regularList = System.Text.Json.JsonSerializer.Deserialize<List<RegularLesson>>(jsonString);
                 }
                 catch(Exception e)
                 {
@@ -76,6 +83,9 @@ namespace School_Schedule.DataBase.FileReadWrite
                 {
                     string inputText = File.ReadAllText(pathOneTime);
                     oneTimeList = JsonConvert.DeserializeObject<List<OneTimeLesson>>(inputText);
+
+                    //string jsonString = File.ReadAllText(pathOneTime);
+                    //oneTimeList = System.Text.Json.JsonSerializer.Deserialize<List<OneTimeLesson>>(jsonString);
                 }
                 catch (Exception e)
                 {
@@ -90,6 +100,53 @@ namespace School_Schedule.DataBase.FileReadWrite
             }
             allLessons = allLessons.Concat(oneTimeList).Concat(regularList).ToList();
             return allLessons;
+        }*/
+
+        public List<BaseLesson> ReadLessons()
+        {
+            var reader = new StreamReader(GetPath(RegularLessonFileName));
+            List<RegularLesson> regularList = new List<RegularLesson>();
+            List<OneTimeLesson> oneTimeList = new List<OneTimeLesson>();
+            List<BaseLesson> lessons = new List<BaseLesson>();
+            int subjectID;
+            int teacherID;
+            DayOfWeek dayOfWeek;
+            string startTime;
+            string endTime;
+            while (!reader.EndOfStream)
+            {
+                var line = reader.ReadLine();
+                var values = line.Split(';');
+                subjectID = int.Parse(values[0]);
+                Subject subject = subjectService.GetById(subjectID);
+                teacherID = int.Parse(values[1]);
+                Teacher teacher = teacherService.GetTeacherByID(teacherID);
+                dayOfWeek = (DayOfWeek)int.Parse(values[2]);
+                startTime = reader.ReadLine();
+                endTime = reader.ReadLine();
+                regularList.Add(new RegularLesson(subject, teacher, startTime, endTime, dayOfWeek));
+            }
+
+            reader = new StreamReader(GetPath(OneTimeLessonFileName));
+            while (!reader.EndOfStream)
+            {
+                var line = reader.ReadLine();
+                var values = line.Split(';');
+                subjectID = int.Parse(values[0]);
+                Subject subject = subjectService.GetById(subjectID);
+                teacherID = int.Parse(values[1]);
+                Teacher teacher = teacherService.GetTeacherByID(teacherID);
+                startTime = reader.ReadLine();
+                string[] startTimeComponents = startTime.Split(' ');
+                endTime = reader.ReadLine();
+                string[] endTimeComponents = endTime.Split(' ');
+                DateTime date = new DateTime(int.Parse(startTimeComponents[0]), int.Parse(startTimeComponents[1]),
+                    int.Parse(startTimeComponents[2]), 0, 0, 0);
+                oneTimeList.Add(new OneTimeLesson(subject, teacher, $"{startTimeComponents[3]}:{startTimeComponents[4]}",
+                    $"{endTimeComponents[3]}:{endTimeComponents[4]}", date));
+            }
+            //MessageBox.Show($"{regularList[0].GetDayOfWeek()} {regularList[1].GetDayOfWeek()}");
+            return lessons.Concat(regularList).Concat(oneTimeList).ToList();
         }
 
         public List<Subject> ReadSubjects()
@@ -99,12 +156,12 @@ namespace School_Schedule.DataBase.FileReadWrite
 
             if (File.Exists(path))
             {
-                string inputText = File.ReadAllText(path);
-                subjectList = JsonConvert.DeserializeObject<List<Subject>>(inputText);
+                string jsonString = File.ReadAllText(path);
+                subjectList = System.Text.Json.JsonSerializer.Deserialize<List<Subject>>(jsonString);
             }
             else
             {
-                MessageBox.Show("Unable to find a file with data");
+                MessageBox.Show("Unable to find a file with subject data");
             }
 
             return subjectList;
@@ -114,7 +171,7 @@ namespace School_Schedule.DataBase.FileReadWrite
         {
             string pathPrivateTeacher = GetPath(PrivateTeacherFileName);
             List<PrivateTeacher> privateTeachersList = new List<PrivateTeacher>();
-            string pathSchoolTeacher = GetPath(PrivateTeacherFileName);
+            string pathSchoolTeacher = GetPath(SchoolTeacherFileName);
             List<SchoolTeacher> schoolTeachersList = new List<SchoolTeacher>();
             List<Teacher> allTeachers = new List<Teacher>();
 
@@ -138,35 +195,73 @@ namespace School_Schedule.DataBase.FileReadWrite
                 MessageBox.Show("Unable to find a file with data");
             }
             allTeachers = allTeachers.Concat(schoolTeachersList).Concat(privateTeachersList).ToList();
-            //MessageBox.Show(String.Join(" ", allTeachers));
             return allTeachers;
         }
 
-        public void WriteLessonBlocks()
+        /*public void WriteLessons()
         {
-            var jsonContent = JsonConvert.SerializeObject(lessonBlocksService.Get());
-            string path = GetPath(LessonBlockFileName);
-            File.WriteAllText(path, jsonContent);
-        }
+            //var jsonContent = JsonConvert.SerializeObject(lessonService.GetOneTime());
+            //string path = GetPath(OneTimeLessonFileName);
+            //File.WriteAllText(path, jsonContent);
+
+            var options = new JsonSerializerOptions { IncludeFields = true };
+            try
+            {
+                string path = GetPath(OneTimeLessonFileName);
+                string jsonString = System.Text.Json.JsonSerializer.Serialize(lessonService.GetOneTime(), options);
+                File.WriteAllText(path, jsonString);
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
+            //jsonContent = JsonConvert.SerializeObject(lessonService.GetRegular());
+            //path = GetPath(RegularLessonFileName);
+            //File.WriteAllText(path, jsonContent);
+
+            try
+            {
+                string path = GetPath(RegularLessonFileName);
+                string jsonString = System.Text.Json.JsonSerializer.Serialize(lessonService.GetRegular(), options);
+                File.WriteAllText(path, jsonString);
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+        }*/
 
         public void WriteLessons()
         {
-            var jsonContent = JsonConvert.SerializeObject(lessonService.GetOneTime());
             string path = GetPath(OneTimeLessonFileName);
-            File.WriteAllText(path, jsonContent);
+            StringBuilder lessons = new StringBuilder();
+            //lessons.AppendLine(lessonService.GetOneTime().Count().ToString());      //кількість об'єктів
+            foreach (var item in lessonService.GetOneTime())
+            {
+                lessons.AppendLine($"{item.SubjectID};{item.TeacherID}");
+                lessons.AppendLine(item.StartTime);
+                lessons.AppendLine(item.EndTime);
+            }
+            File.WriteAllText(path, lessons.ToString());
 
-            jsonContent = JsonConvert.SerializeObject(lessonService.GetRegular());
             path = GetPath(RegularLessonFileName);
-            File.WriteAllText(path, jsonContent);
+            lessons = new StringBuilder();
+            //lessons.AppendLine(lessonService.GetRegular().Count().ToString());      //кількість об'єктів
+            foreach (var item in lessonService.GetRegular())
+            {
+                lessons.AppendLine($"{item.SubjectID};{item.TeacherID};{(int)item.GetDayOfWeek()}");
+                lessons.AppendLine(item.StartTime);
+                lessons.AppendLine(item.EndTime);
+            }
+            File.WriteAllText(path, lessons.ToString());
         }
-
-        
 
         public void WriteSubjects()
         {
-            var jsonContent = JsonConvert.SerializeObject(subjectService.Get());
             string path = GetPath(SubjectFileName);
-            File.WriteAllText(path, jsonContent);
+            string jsonString = System.Text.Json.JsonSerializer.Serialize(subjectService.Get());
+            File.WriteAllText(path, jsonString);
         }
 
         public void WriteTeachers()
@@ -174,7 +269,7 @@ namespace School_Schedule.DataBase.FileReadWrite
             var jsonContent = JsonConvert.SerializeObject(teacherService.GetSchoolTeachers());
             string path = GetPath(SchoolTeacherFileName);
             File.WriteAllText(path, jsonContent);
-            
+
             jsonContent = JsonConvert.SerializeObject(teacherService.GetPrivateTeachers());
             path = GetPath(PrivateTeacherFileName);
             File.WriteAllText(path, jsonContent);
@@ -183,8 +278,7 @@ namespace School_Schedule.DataBase.FileReadWrite
         public void Save()
         {
             CheckAndCreateDirectory();
-
-            //WriteLessonBlocks();
+;
             WriteSubjects();
             WriteLessons();
             WriteTeachers();
@@ -198,7 +292,7 @@ namespace School_Schedule.DataBase.FileReadWrite
 
         private void CheckAndCreateDirectory()
         {
-            string path = Path.Combine(Environment.CurrentDirectory, @"DataFolder\");
+            string path = System.IO.Path.Combine(Environment.CurrentDirectory, @"DataFolder\");
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
@@ -207,7 +301,7 @@ namespace School_Schedule.DataBase.FileReadWrite
 
         private string GetPath(string fileName)
         {
-            return Path.Combine(Environment.CurrentDirectory, @"DataFolder\", fileName);
+            return System.IO.Path.Combine(Environment.CurrentDirectory, @"DataFolder\", fileName);
         }
     }
 }
