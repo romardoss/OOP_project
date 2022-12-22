@@ -28,22 +28,13 @@ namespace School_Schedule
         {
             AddSubjectWindow window = new AddSubjectWindow();
             window.ShowDialog();
-            if(window.NewLesson != null)
-            {
-                BaseLesson newLesson = window.NewLesson;
-                CreateLessonBlock(newLesson);
-                RefreshButton_Click();
-            }
-            //отримую з методів іншого вікна значення нового предмету
-            //закриваю процес для вікна
-            //створюю новий урок у розкладі
+            RefreshButton_Click();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             CreateTimeLine();
             CreateCurrentTimeLine();
-            RefreshButton_Click();
             Canvases = new List<Canvas> { Monday, Tuesday, Wednesday, Thursday, Friday,
             Saturday, Sunday };
 
@@ -54,9 +45,10 @@ namespace School_Schedule
             }
             catch(Exception k)
             {
+                MessageBox.Show("Import broblems");
                 MessageBox.Show(k.Message);
             }
-            UpdateLessonBlocksOnCanvas();
+            RefreshButton_Click();
         }
 
         private TextBlock CreateLessonBlock(BaseLesson lesson)
@@ -101,6 +93,7 @@ namespace School_Schedule
         {
             switch ((int)lesson.GetDayOfWeek())
             {
+                case 0: Sunday.Children.Add(block); break;
                 case 1: Monday.Children.Add(block); break;
                 case 2: Tuesday.Children.Add(block); break;
                 case 3: Wednesday.Children.Add(block); break;
@@ -108,16 +101,21 @@ namespace School_Schedule
                 case 5: Friday.Children.Add(block); break;
                 case 6: Saturday.Children.Add(block); break;
                 case 7: Sunday.Children.Add(block); break;
+                default: MessageBox.Show($"Error: the day of week with value {(int)lesson.GetDayOfWeek()} can not be found"); break;
             }
         }
 
         private void UpdateLessonBlocksOnCanvas()
         {
             LessonService lessonService = new LessonService();
+            LessonBlocksService blocksService = new LessonBlocksService();
             foreach (var lesson in lessonService.Get())
             {
-                TextBlock block = CreateLessonBlock(lesson);
-                AddLessonBlockToTheCanvas(lesson, block);
+                if (!blocksService.Get().ContainsValue(lesson))
+                {
+                    TextBlock block = CreateLessonBlock(lesson);
+                    AddLessonBlockToTheCanvas(lesson, block);
+                }
             }
         }
 
@@ -167,7 +165,7 @@ namespace School_Schedule
                 TextBlock currentLesson = LessonBlocksService.FindCurrent();
                 currentLesson.Background = new SolidColorBrush(Color.FromRgb(173, 210, 117));
             }
-            catch (Exception) { }
+            catch (Exception) { /*MessageBox.Show("Current lesson not found");*/ }
         }
 
         private void SetNotCurrentLessons()
@@ -193,13 +191,12 @@ namespace School_Schedule
 
         private void RefreshButton_Click(object sender=null, RoutedEventArgs e=null)
         {
-            SetCurrentLesson();
-            //і ще має бути функція зміни кольору з червоного на зелений, якщо урок уже триває
             LessonBlocksService lessonBlocksService = new LessonBlocksService();
             lessonBlocksService.DeleteOneTimeLessonsThatAreGone();
             RemoveDeletedLessons();
-            SetNotCurrentLessons();
             UpdateLessonBlocksOnCanvas();
+            SetCurrentLesson();
+            SetNotCurrentLessons();
         }
 
         private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -219,9 +216,19 @@ namespace School_Schedule
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             ReadWriteManager readWriteManager = new ReadWriteManager();
-            readWriteManager.Save();
+            try
+            {
+                readWriteManager.Save();
+            }
+            catch(Exception) 
+            {
+                MessageBox.Show("Oops, something went wrong.\nPlease, try again");
+                //SaveButton_Click(sender, e);
+                return;
+                //MessageBox.Show(ex.Message); 
+            }
             //MessageBox.Show("Hello, " + Environment.UserName);
-            MessageBox.Show("In Developing");
+            MessageBox.Show("Saved successfully");
         }
     }
 }

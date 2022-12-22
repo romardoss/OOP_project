@@ -234,9 +234,17 @@ namespace School_Schedule.DataBase.FileReadWrite
 
         public void WriteLessons()
         {
+            if(lessonService.GetRegular().Count == 0)
+            {
+                File.WriteAllText(GetPath(RegularLessonFileName), "");
+            }
+            if (lessonService.GetOneTime().Count == 0)
+            {
+                File.WriteAllText(GetPath(OneTimeLessonFileName), "");
+            }
+
             string path = GetPath(OneTimeLessonFileName);
             StringBuilder lessons = new StringBuilder();
-            //lessons.AppendLine(lessonService.GetOneTime().Count().ToString());      //кількість об'єктів
             foreach (var item in lessonService.GetOneTime())
             {
                 lessons.AppendLine($"{item.SubjectID};{item.TeacherID}");
@@ -247,7 +255,6 @@ namespace School_Schedule.DataBase.FileReadWrite
 
             path = GetPath(RegularLessonFileName);
             lessons = new StringBuilder();
-            //lessons.AppendLine(lessonService.GetRegular().Count().ToString());      //кількість об'єктів
             foreach (var item in lessonService.GetRegular())
             {
                 lessons.AppendLine($"{item.SubjectID};{item.TeacherID};{(int)item.GetDayOfWeek()}");
@@ -279,9 +286,9 @@ namespace School_Schedule.DataBase.FileReadWrite
         {
             CheckAndCreateDirectory();
 ;
+            WriteTeachers();
             WriteSubjects();
             WriteLessons();
-            WriteTeachers();
         }
 
         public void Import()

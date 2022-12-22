@@ -21,37 +21,9 @@ namespace School_Schedule.DataBase
 
         public void UpdateDatabase()
         {
-            //Teachers = ReadWriteManager.ReadTeachers();
-            //Subjects = ReadWriteManager.ReadSubjects();
-            //Lessons = ReadWriteManager.ReadLessons();
-            try
-            {
-                Teachers = ReadWriteManager.ReadTeachers();
-            }
-            catch(Exception e)
-            {
-                MessageBox.Show("Teacher read error");
-                MessageBox.Show(e.Message);
-            }
-            try
-            {
-                Subjects = ReadWriteManager.ReadSubjects();
-            }
-            catch(Exception e)
-            {
-                MessageBox.Show("Subjects read error");
-                MessageBox.Show(e.Message);
-            }
-            try
-            {
-                Lessons = ReadWriteManager.ReadLessons();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Lessons read error");
-                MessageBox.Show(e.Message);
-            }
-
+            Teachers = ReadWriteManager.ReadTeachers();
+            Subjects = ReadWriteManager.ReadSubjects();
+            Lessons = ReadWriteManager.ReadLessons();
         }
     }
 }

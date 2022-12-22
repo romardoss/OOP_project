@@ -12,6 +12,7 @@ namespace School_Schedule.DataBase.IServices
         TextBlock GetKeyByValue(BaseLesson lesson);
         TextBlock FindCurrent();
         bool ContainsKey(TextBlock block);
+        bool ContainsValue(BaseLesson lesson);
         void Delete(TextBlock block);
         void DeleteByValue(BaseLesson lesson);
         void DeleteOneTimeLessonsThatAreGone();

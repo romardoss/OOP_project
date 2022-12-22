@@ -79,6 +79,7 @@ namespace School_Schedule
                 {
                     NewLesson = new OneTimeLesson(subject, teacher, StartTime.Text, 
                     EndTime.Text, DateOfLesson.SelectedDate.Value);
+                    MessageBox.Show("added successfuly");
                     Close();
                 }
                 else

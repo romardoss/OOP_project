@@ -19,6 +19,11 @@ namespace School_Schedule.DataBase.Services
             return DataBase.LessonBlocks.ContainsKey(block);
         }
 
+        public bool ContainsValue(BaseLesson lesson)
+        {
+            return DataBase.LessonBlocks.ContainsValue(lesson);
+        }
+
         public void Delete(TextBlock block)
         {
             LessonService lessonService = new LessonService();
