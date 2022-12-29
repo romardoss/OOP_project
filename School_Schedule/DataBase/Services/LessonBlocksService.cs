@@ -9,26 +9,29 @@ namespace School_Schedule.DataBase.Services
 {
     public class LessonBlocksService : ILessonBlocksService
     {
+        public static Dictionary<TextBlock, BaseLesson> LessonBlocks = new Dictionary<TextBlock, BaseLesson>();
+
+
         public void Add(TextBlock block, BaseLesson lesson)
         {
-            DataBase.LessonBlocks.Add(block, lesson);
+            LessonBlocks.Add(block, lesson);
         }
 
         public bool ContainsKey(TextBlock block)
         {
-            return DataBase.LessonBlocks.ContainsKey(block);
+            return LessonBlocks.ContainsKey(block);
         }
 
         public bool ContainsValue(BaseLesson lesson)
         {
-            return DataBase.LessonBlocks.ContainsValue(lesson);
+            return LessonBlocks.ContainsValue(lesson);
         }
 
         public void Delete(TextBlock block)
         {
             LessonService lessonService = new LessonService();
             lessonService.Delete(GetValue(block));
-            DataBase.LessonBlocks.Remove(block);
+            LessonBlocks.Remove(block);
         }
 
         public void DeleteByValue(BaseLesson lesson)
@@ -38,22 +41,22 @@ namespace School_Schedule.DataBase.Services
 
         public TextBlock FindCurrent()
         {
-            return DataBase.LessonBlocks.First(x => x.Value.IsNow()).Key;
+            return LessonBlocks.First(x => x.Value.IsNow()).Key;
         }
 
         public Dictionary<TextBlock, BaseLesson> Get()
         {
-            return DataBase.LessonBlocks;
+            return LessonBlocks;
         }
 
         public TextBlock GetKeyByValue(BaseLesson lesson)
         {
-            return DataBase.LessonBlocks.First(x => x.Value == lesson).Key;
+            return LessonBlocks.First(x => x.Value == lesson).Key;
         }
 
         public BaseLesson GetValue(TextBlock block)
         {
-            if (!DataBase.LessonBlocks.TryGetValue(block, out BaseLesson lesson))
+            if (!LessonBlocks.TryGetValue(block, out BaseLesson lesson))
             {
                 MessageBox.Show("Unable to find the lesson");
                 return null;

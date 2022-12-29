@@ -7,24 +7,26 @@ namespace School_Schedule.DataBase.Services
 {
     public class DeleteService : IDeleteService
     {
+        public static List<TextBlock> QueueToDeleteBlocks = new List<TextBlock>();
+
         public void Add(TextBlock block)
         {
-            DataBase.QueueToDeleteBlocks.Add(block);
+            QueueToDeleteBlocks.Add(block);
         }
 
         public void Clean()
         {
-            DataBase.QueueToDeleteBlocks = new List<TextBlock>();
+            QueueToDeleteBlocks = new List<TextBlock>();
         }
 
         public void Delete(TextBlock block)
         {
-            DataBase.QueueToDeleteBlocks.Remove(block);
+            QueueToDeleteBlocks.Remove(block);
         }
 
         public List<TextBlock> GetList()
         {
-            return DataBase.QueueToDeleteBlocks;
+            return QueueToDeleteBlocks;
         }
 
         public void MoveToTrash(BaseLesson lesson)
