@@ -6,7 +6,7 @@ namespace School_Schedule.Logic.LessonFolder
 {
     public class RegularLesson : BaseLesson
     {
-        public DayOfWeek DayOfWeek { get; }
+        private DayOfWeek DayOfWeek { get; }
 
         public RegularLesson(Subject subject, Teacher teacher, string timeStart, 
             string timeEnd, DayOfWeek dayOfWeek)

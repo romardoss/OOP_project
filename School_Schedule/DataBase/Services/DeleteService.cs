@@ -1,6 +1,8 @@
 ﻿using School_Schedule.DataBase.IServices;
 using School_Schedule.Logic.LessonFolder;
+using System;
 using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace School_Schedule.DataBase.Services
@@ -34,6 +36,7 @@ namespace School_Schedule.DataBase.Services
             LessonBlocksService lessonBlocksService = new LessonBlocksService();
             Add(lessonBlocksService.GetKeyByValue(lesson));
             lessonBlocksService.DeleteByValue(lesson);
+
         }
 
         public void MoveToTrash(TextBlock block)

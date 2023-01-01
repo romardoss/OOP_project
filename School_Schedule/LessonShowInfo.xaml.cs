@@ -43,11 +43,11 @@ namespace School_Schedule
             try
             {
                 RegularLesson rLesson = (RegularLesson)Lesson;
-                if((int)rLesson.DayOfWeek == 7)
+                if((int)rLesson.GetDayOfWeek() == 7)
                 {
                     return "Sunday ";
                 }
-                return $"{rLesson.DayOfWeek} ";
+                return $"{rLesson.GetDayOfWeek()} ";
             } catch { }
             try
             {
