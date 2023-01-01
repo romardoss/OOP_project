@@ -11,7 +11,6 @@ using System.Windows.Controls;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Newtonsoft.Json;
-using System.Windows.Shapes;
 using System.Text;
 
 namespace School_Schedule.DataBase.FileReadWrite
@@ -28,25 +27,6 @@ namespace School_Schedule.DataBase.FileReadWrite
         private readonly string SubjectFileName = "SubjectData.json";
         private readonly string RegularLessonFileName = "RegularLessonData.csv";
         private readonly string OneTimeLessonFileName = "OneTimeLessonData.csv";
-        private readonly string LessonBlockFileName = "LessonBlockData.json";
-
-        public Dictionary<TextBlock, BaseLesson> ReadLessonBlocks()
-        {
-            string path = GetPath(LessonBlockFileName);
-            Dictionary<TextBlock, BaseLesson> blockList = new Dictionary<TextBlock, BaseLesson>();
-
-            if (File.Exists(path))
-            {
-                string inputText = File.ReadAllText(path);
-                blockList = JsonConvert.DeserializeObject<Dictionary<TextBlock, BaseLesson>>(inputText);
-            }
-            else
-            {
-                MessageBox.Show("Unable to find a file with data");
-            }
-
-            return blockList;
-        }
 
         /*public List<BaseLesson> ReadLessons()
         {

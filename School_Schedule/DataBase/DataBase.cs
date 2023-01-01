@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Collections.Generic;
 using School_Schedule.DataBase.FileReadWrite;
 using School_Schedule.Logic.LessonFolder;
 using School_Schedule.Logic.SubjectFolder;
@@ -16,8 +13,6 @@ namespace School_Schedule.DataBase
         public static List<Teacher> Teachers = new List<Teacher>();
         public static List<Subject> Subjects = new List<Subject>();
         public static List<BaseLesson> Lessons = new List<BaseLesson>();
-        //public static Dictionary<TextBlock, BaseLesson> LessonBlocks = new Dictionary<TextBlock, BaseLesson>();
-        //public static List<TextBlock> QueueToDeleteBlocks = new List<TextBlock>();
 
         public void UpdateDatabase()
         {
